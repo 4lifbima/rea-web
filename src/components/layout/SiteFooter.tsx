@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { SaroLogo } from '../brand/SaroLogo';
@@ -35,7 +35,7 @@ export const SiteFooter: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))',
             gap: '48px',
             marginBottom: '64px',
           }}
@@ -195,7 +195,7 @@ export const SiteFooter: React.FC = () => {
           }}
         >
           <div>
-            © 2026 Saro Finance UI. Re-engineered modern frontend demo. Not affiliated with Framer.
+            Â© 2026 Saro Finance UI. Re-engineered modern frontend demo. Not affiliated with Framer.
           </div>
 
           <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>

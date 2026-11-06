@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { blogPostsData } from '../data/blog';
 import { ArrowLeft, Clock, Calendar, Share2, Check } from 'lucide-react';
@@ -165,7 +165,7 @@ export const BlogPostPage: React.FC = () => {
           <h3 style={{ fontSize: '22px', fontWeight: 700, marginBottom: '24px', color: '#141414' }}>
             Related playbooks
           </h3>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: '20px' }}>
             {related.map((item) => (
               <Link
                 key={item.slug}

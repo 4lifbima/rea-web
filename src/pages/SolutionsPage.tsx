@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Rocket, TrendingUp, Globe2, Building, CheckCircle2, ArrowRight } from 'lucide-react';
@@ -98,7 +98,7 @@ export const SolutionsPage: React.FC = () => {
               padding: '48px',
               boxShadow: 'var(--shadow-card)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
               gap: '40px',
               alignItems: 'center',
             }}

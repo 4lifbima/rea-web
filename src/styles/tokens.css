@@ -1,82 +1,127 @@
-/* Saro Finance UI - Design Tokens */
-:root {
-  /* Surfaces & Backgrounds */
-  --color-bg: #f7f7f7;
-  --color-bg-subtle: #f0f0f0;
-  --color-bg-subtle-hover: #e8e8e8;
-  --color-surface: #ffffff;
-  --color-surface-hover: #fafafa;
-  --color-surface-elevated: #ffffff;
-  --color-surface-dark: #141414;
-  --color-surface-dark-elevated: #1e1e1e;
-  --color-surface-dark-subtle: #262626;
+/* Local Fontshare Switzer @font-face declarations */
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/6IN5WOLRCYP4G4MOCOHOMXNON6Q7MDAR.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/O34WRFYO7JNWEBBA2LRV2XYRUSYXYDKH.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/6XPIMU23OJVRY676OG5YVJMWEHWICATX.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/C6VLICDGQWYKV6YT65TM5G3OVN4AOZBN.woff2') format('woff2');
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/YS3VPNVO4B3TOJMEXDGFZQ4TLZGGSRZC.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/IOAFMDAPNX3S6OL2GYQQJ2FFJIRSVB3N.woff2') format('woff2');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/Y7SCNZJOT2MW5ADSGOFLDGH4TNL4JCQY.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/A7AS3UPAGLC7MDVC67SBNTE5FGF2Z2RG.woff2') format('woff2');
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Switzer';
+  src: url('/assets/fonts/TOHQHMLIEIPKVF2JPM6SVKXFYGO5G2TJ.woff2') format('woff2');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
 
-  /* Typography / Text Colors */
+:root {
+  /* Reference Exact Color Tokens */
+  --color-bg: #ffffff;
+  --color-bg-card: #f7f7f7;
+  --color-bg-subtle: #f0f0f0;
+  --color-surface: #ffffff;
+  --color-surface-dark: #141414;
+  --color-surface-dark-2: #262626;
+  --color-surface-dark-3: #404040;
+
+  /* Text Tokens */
   --color-text: #141414;
   --color-text-secondary: #404040;
   --color-text-muted: #707070;
   --color-text-subtle: #adadad;
   --color-text-inverse: #ffffff;
-  --color-text-inverse-muted: rgba(255, 255, 255, 0.7);
 
-  /* Borders & Dividers */
+  /* Borders */
   --color-border: #ebebeb;
-  --color-border-subtle: #f0f0f0;
   --color-border-strong: #dbdbdb;
-  --color-border-dark: #262626;
-  --color-border-dark-strong: #333333;
+  --color-border-subtle: #f0f0f0;
 
-  /* Brand / Primary Accent (Vibrant Saro Blue) */
+  /* Brand & Accent Colors */
   --color-primary: #0066ff;
   --color-primary-hover: #0052d9;
-  --color-primary-subtle: #ebf3ff;
   --color-primary-light: #b3d1ff;
+  --color-primary-subtle: #ebf3ff;
 
-  /* Semantic Feedback Colors */
+  --color-lime: #ccff00;
+  --color-green: #00d64f;
   --color-success: #12a150;
   --color-success-bg: #e7f6ee;
-  --color-success-bright: #00d64f;
-  
-  --color-warning: #ff6b1a;
-  --color-warning-bg: #fff2ea;
-
+  --color-orange: #ff6b1a;
+  --color-violet: #635bff;
+  --color-mint: #2ee6c5;
   --color-error: #e5484d;
-  --color-error-bg: #fdecec;
-
-  /* Badges */
-  --color-badge-bg: #f0f0f0;
-  --color-badge-text: #404040;
-  --color-badge-border: #e8e8e8;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-mono: 'Geist Mono', 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+  --font-sans: 'Switzer', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Border Radii */
-  --radius-xs: 4px;
+  /* Radii */
+  --radius-xs: 6px;
   --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 18px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
   --radius-xl: 24px;
   --radius-2xl: 32px;
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-subtle: 0 1px 3px rgba(0, 0, 0, 0.04);
-  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 3px rgba(0, 0, 0, 0.02);
-  --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
-  --shadow-dropdown: 0 16px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
-  --shadow-elevated: 0 20px 48px rgba(0, 0, 0, 0.12), 0 6px 16px rgba(0, 0, 0, 0.06);
+  --shadow-subtle: 0 1px 3px rgba(20, 20, 20, 0.04);
+  --shadow-card: 0 8px 24px rgba(20, 20, 20, 0.05), 0 1px 2px rgba(20, 20, 20, 0.03);
+  --shadow-float: 0 16px 40px rgba(20, 20, 20, 0.08), 0 2px 8px rgba(20, 20, 20, 0.04);
+  --shadow-nav: 0 4px 24px rgba(20, 20, 20, 0.06), 0 1px 2px rgba(20, 20, 20, 0.04);
 
-  /* Containers & Spacing */
-  --container-max: 1200px;
+  /* Layout */
+  --container-max: 1136px;
   --container-padding: 24px;
-  --section-spacing: 96px;
-  --section-spacing-mobile: 64px;
-
-  /* Transitions */
-  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: 180ms cubic-bezier(0.22, 1, 0.36, 1);
+  --transition-smooth: 380ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-

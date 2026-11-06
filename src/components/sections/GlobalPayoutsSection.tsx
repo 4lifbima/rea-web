@@ -1,17 +1,17 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const GlobalPayoutsSection: React.FC = () => {
   const payoutRows = [
-    { destination: 'Lisbon studio', flag: '🇵🇹', status: 'Sent · arrived in 2s', amount: '€12,400.00' },
-    { destination: 'London contractors', flag: '🇬🇧', status: 'Sent · arrived in 4s', amount: '£8,920.50' },
-    { destination: 'Tokyo office', flag: '🇯🇵', status: 'Sent · arrived in 3s', amount: '¥1,240,000' },
-    { destination: 'Bangalore team', flag: '🇮🇳', status: 'Sent · arrived in 6s', amount: '₹680,000' },
-    { destination: 'Austin payroll', flag: '🇺🇸', status: 'Sent · arrived in 1s', amount: '$46,300.00' },
-    { destination: 'Seoul partners', flag: '🇰🇷', status: 'Sent · arrived in 5s', amount: '₩9,800,000' },
-    { destination: 'Lagos vendors', flag: '🇳🇬', status: 'Sent · arrived in 3s', amount: '₦4,200,000' },
+    { destination: 'Lisbon studio', flag: 'ðŸ‡µðŸ‡¹', status: 'Sent Â· arrived in 2s', amount: 'â‚¬12,400.00' },
+    { destination: 'London contractors', flag: 'ðŸ‡¬ðŸ‡§', status: 'Sent Â· arrived in 4s', amount: 'Â£8,920.50' },
+    { destination: 'Tokyo office', flag: 'ðŸ‡¯ðŸ‡µ', status: 'Sent Â· arrived in 3s', amount: 'Â¥1,240,000' },
+    { destination: 'Bangalore team', flag: 'ðŸ‡®ðŸ‡³', status: 'Sent Â· arrived in 6s', amount: 'â‚¹680,000' },
+    { destination: 'Austin payroll', flag: 'ðŸ‡ºðŸ‡¸', status: 'Sent Â· arrived in 1s', amount: '$46,300.00' },
+    { destination: 'Seoul partners', flag: 'ðŸ‡°ðŸ‡·', status: 'Sent Â· arrived in 5s', amount: 'â‚©9,800,000' },
+    { destination: 'Lagos vendors', flag: 'ðŸ‡³ðŸ‡¬', status: 'Sent Â· arrived in 3s', amount: 'â‚¦4,200,000' },
   ];
 
   return (
@@ -27,7 +27,7 @@ export const GlobalPayoutsSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
             gap: '56px',
             alignItems: 'center',
           }}

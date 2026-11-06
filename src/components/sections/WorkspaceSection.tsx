@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '../ui/Badge';
 import { Plus, Download } from 'lucide-react';
 
@@ -182,12 +182,12 @@ export const WorkspaceSection: React.FC = () => {
               <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Balances Across 6 Currencies
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '10px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(130px, 100%), 1fr))', gap: '10px' }}>
                 {[
                   { curr: 'USD', amount: '$1.24M' },
-                  { curr: 'EUR', amount: '€382K' },
-                  { curr: 'GBP', amount: '£96.8K' },
-                  { curr: 'JPY', amount: '¥14.2M' },
+                  { curr: 'EUR', amount: 'â‚¬382K' },
+                  { curr: 'GBP', amount: 'Â£96.8K' },
+                  { curr: 'JPY', amount: 'Â¥14.2M' },
                 ].map((b) => (
                   <div
                     key={b.curr}
@@ -210,7 +210,7 @@ export const WorkspaceSection: React.FC = () => {
               <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', marginBottom: '10px', textTransform: 'uppercase' }}>
                 Grouped by Team
               </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '16px' }}>
                 <div style={{ padding: '16px', borderRadius: '12px', backgroundColor: '#f9f9f9', border: '1px solid #ebebeb' }}>
                   <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414', marginBottom: '4px' }}>Operations</div>
                   <div className="mono-num" style={{ fontSize: '20px', fontWeight: 700, color: '#141414' }}>$1.2M</div>

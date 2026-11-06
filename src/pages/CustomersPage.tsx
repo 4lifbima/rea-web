@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '../components/ui/Badge';
 import { testimonialsData } from '../data/testimonials';
 import { Star } from 'lucide-react';
@@ -67,7 +67,7 @@ export const CustomersPage: React.FC = () => {
               padding: '40px',
               boxShadow: 'var(--shadow-card)',
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
               gap: '36px',
               alignItems: 'center',
             }}
@@ -75,7 +75,7 @@ export const CustomersPage: React.FC = () => {
             <div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
                 <span style={{ fontSize: '18px', fontWeight: 700, color: '#141414' }}>{cs.company}</span>
-                <span style={{ fontSize: '13px', color: '#707070' }}>· {cs.lead}</span>
+                <span style={{ fontSize: '13px', color: '#707070' }}>Â· {cs.lead}</span>
               </div>
               <h2 style={{ fontSize: '24px', fontWeight: 700, color: '#141414', marginBottom: '16px', lineHeight: 1.3 }}>
                 {cs.headline}
@@ -130,7 +130,7 @@ export const CustomersPage: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(300px, 100%), 1fr))',
             gap: '20px',
           }}
         >
@@ -154,7 +154,7 @@ export const CustomersPage: React.FC = () => {
                 &ldquo;{item.quote}&rdquo;
               </p>
               <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>{item.name}</div>
-              <div style={{ fontSize: '11px', color: '#707070' }}>{item.title} · {item.company}</div>
+              <div style={{ fontSize: '11px', color: '#707070' }}>{item.title} Â· {item.company}</div>
             </div>
           ))}
         </div>

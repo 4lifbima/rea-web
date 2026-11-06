@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { CheckCircle2, Clock, Headphones, Send, Loader2 } from 'lucide-react';
@@ -53,7 +53,7 @@ export const ContactSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
             gap: '56px',
             alignItems: 'center',
           }}
@@ -67,7 +67,7 @@ export const ContactSection: React.FC = () => {
               Talk to a real person.
             </h2>
             <p className="section-description" style={{ marginBottom: '32px' }}>
-              Tell us how your team moves money today and we’ll show you what Saro would change. No pushy sales, just answers.
+              Tell us how your team moves money today and weâ€™ll show you what Saro would change. No pushy sales, just answers.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '18px', marginBottom: '36px' }}>

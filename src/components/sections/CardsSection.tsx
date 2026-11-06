@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Wifi, ArrowRight } from 'lucide-react';
@@ -45,7 +45,7 @@ export const CardsSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(360px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
             gap: '56px',
             alignItems: 'center',
           }}
@@ -115,7 +115,7 @@ export const CardsSection: React.FC = () => {
                     marginBottom: '8px',
                   }}
                 >
-                  •••• •••• •••• 5530
+                  â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 5530
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: '12px' }}>
                   <div style={{ fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
@@ -180,7 +180,7 @@ export const CardsSection: React.FC = () => {
               Cards as unique as your team
             </h2>
             <p className="section-description" style={{ marginBottom: '20px' }}>
-              Give every teammate a card that feels like theirs. Pick a colour, print a name and set the limits before it ships. Pay anywhere and withdraw cash while travelling, or go fully virtual and add it to your phone’s wallet in one tap.
+              Give every teammate a card that feels like theirs. Pick a colour, print a name and set the limits before it ships. Pay anywhere and withdraw cash while travelling, or go fully virtual and add it to your phoneâ€™s wallet in one tap.
             </p>
             <p style={{ fontSize: '13px', color: '#adadad', marginBottom: '32px' }}>
               Custom designs and delivery fees may apply on some plans.

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { ArrowUpRight, ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 
@@ -7,8 +7,8 @@ export const HeroSection: React.FC = () => {
 
   const balances = {
     USD: { formatted: '$2,481,920.00', delta: '+4.2% ($102,400)', change: '+4.2%' },
-    EUR: { formatted: '€2,284,350.00', delta: '+3.8% (€84,100)', change: '+3.8%' },
-    GBP: { formatted: '£1,962,800.00', delta: '+4.5% (£85,200)', change: '+4.5%' },
+    EUR: { formatted: 'â‚¬2,284,350.00', delta: '+3.8% (â‚¬84,100)', change: '+3.8%' },
+    GBP: { formatted: 'Â£1,962,800.00', delta: '+4.5% (Â£85,200)', change: '+4.5%' },
   };
 
   return (
@@ -194,7 +194,7 @@ export const HeroSection: React.FC = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
                 gap: '24px',
                 marginBottom: '32px',
               }}
@@ -276,7 +276,7 @@ export const HeroSection: React.FC = () => {
             <div
               style={{
                 display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(min(210px, 100%), 1fr))',
                 gap: '16px',
                 paddingTop: '24px',
                 borderTop: '1px solid #f0f0f0',

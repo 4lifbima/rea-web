@@ -5,27 +5,28 @@ interface SaroLogoProps {
   variant?: 'dark' | 'light';
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
+  lowercase?: boolean;
 }
 
 export const SaroLogo: React.FC<SaroLogoProps> = ({
   variant = 'dark',
   size = 'md',
   showText = true,
+  lowercase = false,
 }) => {
   const iconSizes = {
-    sm: 24,
-    md: 28,
-    lg: 36,
+    sm: 28,
+    md: 36,
+    lg: 42,
   };
 
   const textSizes = {
-    sm: '18px',
-    md: '21px',
-    lg: '26px',
+    sm: '16px',
+    md: '19px',
+    lg: '22px',
   };
 
   const currentIconSize = iconSizes[size];
-
   const circleBg = variant === 'light' ? '#ffffff' : '#141414';
   const strokeColor = variant === 'light' ? '#141414' : '#ffffff';
   const textColor = variant === 'light' ? '#ffffff' : '#141414';
@@ -36,11 +37,11 @@ export const SaroLogo: React.FC<SaroLogoProps> = ({
       style={{
         display: 'inline-flex',
         alignItems: 'center',
-        gap: '9px',
+        gap: '10px',
         textDecoration: 'none',
         userSelect: 'none',
       }}
-      aria-label="Saro Finance Home"
+      aria-label="Saro Home"
     >
       <div
         style={{
@@ -52,43 +53,21 @@ export const SaroLogo: React.FC<SaroLogoProps> = ({
           alignItems: 'center',
           justifyContent: 'center',
           flexShrink: 0,
-          boxShadow: variant === 'dark' ? '0 2px 6px rgba(0,0,0,0.12)' : 'none',
         }}
       >
         <svg
-          width={currentIconSize * 0.65}
-          height={currentIconSize * 0.65}
+          width={currentIconSize * 0.56}
+          height={currentIconSize * 0.56}
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
         >
-          {/* Saro Starburst Mark */}
-          <line
-            x1="12"
-            y1="3.5"
-            x2="12"
-            y2="20.5"
+          <path
+            d="M12 3.75V20.25M4.5 7.5L19.5 16.5M4.5 16.5L19.5 7.5"
             stroke={strokeColor}
-            strokeWidth="2.4"
+            strokeWidth="2.6"
             strokeLinecap="round"
-          />
-          <line
-            x1="4.5"
-            y1="7.5"
-            x2="19.5"
-            y2="16.5"
-            stroke={strokeColor}
-            strokeWidth="2.4"
-            strokeLinecap="round"
-          />
-          <line
-            x1="4.5"
-            y1="16.5"
-            x2="19.5"
-            y2="7.5"
-            stroke={strokeColor}
-            strokeWidth="2.4"
-            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         </svg>
       </div>
@@ -97,18 +76,15 @@ export const SaroLogo: React.FC<SaroLogoProps> = ({
         <span
           style={{
             fontSize: textSizes[size],
-            fontWeight: 700,
-            letterSpacing: '-0.04em',
+            fontWeight: 600,
+            letterSpacing: '-0.03em',
             color: textColor,
             lineHeight: 1,
-            display: 'inline-block',
-            transform: 'translateY(-0.5px)',
           }}
         >
-          saro
+          {lowercase ? 'saro' : 'Saro'}
         </span>
       )}
     </Link>
   );
 };
-

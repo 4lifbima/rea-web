@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { pricingPlans } from '../data/pricing';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
@@ -98,7 +98,7 @@ export const PricingPage: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))',
             gap: '24px',
             alignItems: 'stretch',
             marginBottom: '80px',
@@ -169,7 +169,7 @@ export const PricingPage: React.FC = () => {
                   </Button>
 
                   <div style={{ fontSize: '12px', fontWeight: 600, color: '#adadad', textTransform: 'uppercase', marginBottom: '14px' }}>
-                    What’s included
+                    Whatâ€™s included
                   </div>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {plan.features.map((feature, idx) => (

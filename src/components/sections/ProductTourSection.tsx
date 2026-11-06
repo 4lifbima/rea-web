@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { Tabs } from '../ui/Tabs';
 import { productTourTabs } from '../../data/products';
@@ -149,11 +149,11 @@ export const ProductTourSection: React.FC = () => {
             )}
 
             {activeTab === 'accounts' && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(260px, 100%), 1fr))', gap: '20px' }}>
                 {[
                   { name: 'US Operating Account', iban: 'US89 SARO 0124 5510', amount: '$1,240,500.00', status: 'Domestic ACH' },
-                  { name: 'European Treasury IBAN', iban: 'DE89 3704 0044 0532', amount: '€382,120.40', status: 'SEPA Instant' },
-                  { name: 'UK Clearing Account', iban: 'GB29 NWBK 6016 1331', amount: '£96,800.00', status: 'Faster Payments' },
+                  { name: 'European Treasury IBAN', iban: 'DE89 3704 0044 0532', amount: 'â‚¬382,120.40', status: 'SEPA Instant' },
+                  { name: 'UK Clearing Account', iban: 'GB29 NWBK 6016 1331', amount: 'Â£96,800.00', status: 'Faster Payments' },
                 ].map((acc, i) => (
                   <div key={i} style={{ padding: '20px', borderRadius: '14px', backgroundColor: '#f9f9f9', border: '1px solid #ebebeb' }}>
                     <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414', marginBottom: '4px' }}>{acc.name}</div>
@@ -168,11 +168,11 @@ export const ProductTourSection: React.FC = () => {
             )}
 
             {activeTab === 'cards' && (
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '20px' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))', gap: '20px' }}>
                 <div style={{ padding: '24px', borderRadius: '16px', backgroundColor: '#141414', color: '#ffffff' }}>
                   <div style={{ fontSize: '12px', color: '#adadad', marginBottom: '8px' }}>Corporate Virtual Card</div>
                   <div style={{ fontSize: '20px', fontWeight: 600, letterSpacing: '0.08em', marginBottom: '24px' }}>
-                    •••• •••• •••• 4410
+                    â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 4410
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px' }}>
                     <span>Elena Rossi</span>

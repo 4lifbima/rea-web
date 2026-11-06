@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { blogPostsData } from '../../data/blog';
@@ -51,7 +51,7 @@ export const BlogSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
             gap: '24px',
           }}
         >
@@ -109,7 +109,7 @@ export const BlogSection: React.FC = () => {
 
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                   <span style={{ fontSize: '18px', fontWeight: 700, letterSpacing: '-0.04em', color: '#141414' }}>saro</span>
-                  <span style={{ fontSize: '11px', color: '#707070' }}>· {post.date}</span>
+                  <span style={{ fontSize: '11px', color: '#707070' }}>Â· {post.date}</span>
                 </div>
               </div>
 

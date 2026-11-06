@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { testimonialsData } from '../../data/testimonials';
 import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
@@ -97,7 +97,7 @@ export const TestimonialsSection: React.FC = () => {
           <div
             style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(310px, 1fr))',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(min(310px, 100%), 1fr))',
               gap: '24px',
             }}
           >
@@ -157,7 +157,7 @@ export const TestimonialsSection: React.FC = () => {
                       {item.name}
                     </div>
                     <div style={{ fontSize: '12px', color: '#707070' }}>
-                      {item.title} · {item.company}
+                      {item.title} Â· {item.company}
                     </div>
                   </div>
                 </div>

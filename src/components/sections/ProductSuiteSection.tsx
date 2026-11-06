@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { CreditCard, Send, Building2, TrendingUp, Sparkles, Wallet } from 'lucide-react';
 
@@ -38,7 +38,7 @@ export const ProductSuiteSection: React.FC = () => {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(min(350px, 100%), 1fr))',
             gap: '24px',
           }}
         >
@@ -165,7 +165,7 @@ export const ProductSuiteSection: React.FC = () => {
                 <div style={{ width: '62%', height: '100%', backgroundColor: '#0066ff', borderRadius: '4px' }} />
               </div>
               <div style={{ fontSize: '11px', color: '#12a150', fontWeight: 500 }}>
-                • 3 cards active (•••• 4410, •••• 2290, •••• 8812)
+                â€¢ 3 cards active (â€¢â€¢â€¢â€¢ 4410, â€¢â€¢â€¢â€¢ 2290, â€¢â€¢â€¢â€¢ 8812)
               </div>
             </div>
           </div>
@@ -214,9 +214,9 @@ export const ProductSuiteSection: React.FC = () => {
               }}
             >
               {[
-                { curr: 'USD', bal: '$1.24M', flag: '🇺🇸' },
-                { curr: 'EUR', bal: '€382K', flag: '🇪🇺' },
-                { curr: 'GBP', bal: '£96.8K', flag: '🇬🇧' },
+                { curr: 'USD', bal: '$1.24M', flag: 'ðŸ‡ºðŸ‡¸' },
+                { curr: 'EUR', bal: 'â‚¬382K', flag: 'ðŸ‡ªðŸ‡º' },
+                { curr: 'GBP', bal: 'Â£96.8K', flag: 'ðŸ‡¬ðŸ‡§' },
               ].map((c) => (
                 <div
                   key={c.curr}
@@ -427,9 +427,9 @@ export const ProductSuiteSection: React.FC = () => {
               </div>
               <div style={{ color: '#404040', display: 'flex', gap: '8px' }}>
                 <span style={{ color: '#12a150', fontWeight: 600 }}>Hexa +142%</span>
-                <span>•</span>
+                <span>â€¢</span>
                 <span style={{ color: '#12a150', fontWeight: 600 }}>Sparkhost +88%</span>
-                <span>•</span>
+                <span>â€¢</span>
                 <span style={{ color: '#12a150', fontWeight: 600 }}>Stackpad +61%</span>
               </div>
             </div>

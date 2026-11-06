@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'dark' | 'ghost' | 'white';
+  variant?: 'primary' | 'secondary' | 'dark' | 'blue' | 'ghost' | 'white';
   size?: 'sm' | 'md' | 'lg';
   to?: string;
   href?: string;
@@ -26,54 +26,56 @@ export const Button: React.FC<ButtonProps> = ({
 }) => {
   const sizeStyles: Record<string, React.CSSProperties> = {
     sm: {
-      padding: '7px 14px',
-      fontSize: '13px',
-      borderRadius: '8px',
+      padding: '8px 16px',
+      fontSize: '13.5px',
+      borderRadius: '9999px',
       gap: '6px',
     },
     md: {
-      padding: '9px 18px',
+      padding: '11px 20px',
       fontSize: '14px',
-      borderRadius: '10px',
-      gap: '8px',
+      borderRadius: '9999px',
+      gap: '7px',
     },
     lg: {
-      padding: '12px 24px',
-      fontSize: '15px',
-      borderRadius: '12px',
+      padding: '13px 24px',
+      fontSize: '14.5px',
+      borderRadius: '9999px',
       gap: '8px',
     },
   };
 
+  // In Saro Reference: Primary CTA is sleek black pill (#141414), Secondary is #f0f0f0 pill
   const variantStyles: Record<string, React.CSSProperties> = {
     primary: {
-      backgroundColor: 'var(--color-primary)',
+      backgroundColor: '#141414',
       color: '#ffffff',
-      border: '1px solid rgba(0, 102, 255, 0.2)',
-      boxShadow: '0 2px 8px rgba(0, 102, 255, 0.25)',
-    },
-    secondary: {
-      backgroundColor: '#ffffff',
-      color: 'var(--color-text)',
-      border: '1px solid var(--color-border)',
-      boxShadow: '0 1px 2px rgba(0, 0, 0, 0.04)',
+      border: '1px solid #141414',
     },
     dark: {
       backgroundColor: '#141414',
       color: '#ffffff',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      boxShadow: '0 4px 12px rgba(0, 0, 0, 0.15)',
+      border: '1px solid #141414',
+    },
+    secondary: {
+      backgroundColor: '#f0f0f0',
+      color: '#141414',
+      border: '1px solid #f0f0f0',
+    },
+    blue: {
+      backgroundColor: '#0066ff',
+      color: '#ffffff',
+      border: '1px solid #0066ff',
     },
     ghost: {
       backgroundColor: 'transparent',
-      color: 'var(--color-text-secondary)',
+      color: '#141414',
       border: '1px solid transparent',
     },
     white: {
       backgroundColor: '#ffffff',
       color: '#141414',
-      border: '1px solid rgba(255, 255, 255, 0.8)',
-      boxShadow: '0 4px 14px rgba(0, 0, 0, 0.08)',
+      border: '1px solid #ebebeb',
     },
   };
 
@@ -82,9 +84,10 @@ export const Button: React.FC<ButtonProps> = ({
     alignItems: 'center',
     justifyContent: 'center',
     fontWeight: 500,
+    letterSpacing: '-0.01em',
     cursor: disabled ? 'not-allowed' : 'pointer',
     opacity: disabled ? 0.6 : 1,
-    transition: 'all var(--transition-fast)',
+    transition: 'transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease',
     textDecoration: 'none',
     whiteSpace: 'nowrap',
     userSelect: 'none',
@@ -93,10 +96,18 @@ export const Button: React.FC<ButtonProps> = ({
     ...style,
   };
 
+  const textStr = typeof children === 'string' ? children : undefined;
+
   const content = (
     <>
       {icon && <span style={{ display: 'inline-flex', alignItems: 'center' }}>{icon}</span>}
-      <span>{children}</span>
+      {textStr ? (
+        <span className="roll-text" data-text={textStr}>
+          <span>{textStr}</span>
+        </span>
+      ) : (
+        <span>{children}</span>
+      )}
       {iconRight && <span style={{ display: 'inline-flex', alignItems: 'center' }}>{iconRight}</span>}
     </>
   );
@@ -123,4 +134,3 @@ export const Button: React.FC<ButtonProps> = ({
     </button>
   );
 };
-
