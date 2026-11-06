@@ -5,6 +5,8 @@ export interface BlogPost {
   excerpt: string;
   date: string;
   readTime: string;
+  coverImage: string;
+  coverTheme: 'blue' | 'violet' | 'lime';
   author: {
     name: string;
     role: string;
@@ -20,6 +22,8 @@ export const blogPostsData: BlogPost[] = [
     excerpt: 'A practical playbook for finance teams that want to stop living in spreadsheets at the end of every month.',
     date: 'Oct 14, 2026',
     readTime: '2 min read',
+    coverImage: '/assets/images/xWFOOKK1lbLehcxHTuR8WG9ScIo.jpg',
+    coverTheme: 'blue',
     author: {
       name: 'Elena Rossi',
       role: 'Finance Operations Lead',
@@ -39,6 +43,8 @@ export const blogPostsData: BlogPost[] = [
     excerpt: 'Ask about spend, runway or late invoices without leaving the conversation your team is already in.',
     date: 'Oct 9, 2026',
     readTime: '2 min read',
+    coverImage: '/assets/images/U7M7yGetl6yutis4osZ3q7GwQ.jpg',
+    coverTheme: 'violet',
     author: {
       name: 'Julian Vance',
       role: 'Head of Product',
@@ -56,6 +62,8 @@ export const blogPostsData: BlogPost[] = [
     excerpt: 'Fees are only part of it. Here is how exchange-rate markups quietly take 3% of every international payment.',
     date: 'Oct 2, 2026',
     readTime: '2 min read',
+    coverImage: '/assets/images/wxIzmtTF9zIq1tnpqlkHFCk1MU.jpg',
+    coverTheme: 'lime',
     author: {
       name: 'Maya Chen',
       role: 'Head of Finance',
@@ -73,6 +81,8 @@ export const blogPostsData: BlogPost[] = [
     excerpt: 'How to safeguard operational runway across multiple custodian banks while earning competitive yields on idle cash.',
     date: 'Sep 24, 2026',
     readTime: '4 min read',
+    coverImage: '/assets/images/xWFOOKK1lbLehcxHTuR8WG9ScIo.jpg',
+    coverTheme: 'blue',
     author: {
       name: 'Daniel Okafor',
       role: 'CFO',
@@ -83,4 +93,3 @@ export const blogPostsData: BlogPost[] = [
     ],
   },
 ];
-

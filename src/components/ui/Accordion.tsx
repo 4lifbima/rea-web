@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { ChevronDown } from 'lucide-react';
 
 export interface AccordionItemData {
   id: string;
@@ -15,7 +14,7 @@ interface AccordionProps {
 
 export const Accordion: React.FC<AccordionProps> = ({
   items,
-  defaultOpenIndex = 0,
+  defaultOpenIndex = -1,
   allowMultiple = false,
 }) => {
   const [openIndexes, setOpenIndexes] = useState<number[]>(
@@ -37,7 +36,7 @@ export const Accordion: React.FC<AccordionProps> = ({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        gap: '12px',
+        gap: '10px',
         width: '100%',
       }}
     >
@@ -47,12 +46,10 @@ export const Accordion: React.FC<AccordionProps> = ({
           <div
             key={item.id}
             style={{
-              backgroundColor: '#ffffff',
-              borderRadius: 'var(--radius-md)',
-              border: '1px solid var(--color-border)',
+              backgroundColor: '#f7f7f7',
+              borderRadius: '18px',
               overflow: 'hidden',
-              transition: 'border-color var(--transition-fast), box-shadow var(--transition-fast)',
-              boxShadow: isOpen ? '0 4px 16px rgba(0,0,0,0.04)' : 'none',
+              transition: 'background-color 0.2s ease',
             }}
           >
             <button
@@ -63,7 +60,7 @@ export const Accordion: React.FC<AccordionProps> = ({
               id={`faq-header-${item.id}`}
               style={{
                 width: '100%',
-                padding: '18px 24px',
+                padding: '18px 22px',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -71,30 +68,38 @@ export const Accordion: React.FC<AccordionProps> = ({
                 gap: '16px',
                 cursor: 'pointer',
                 backgroundColor: 'transparent',
+                border: 'none',
               }}
             >
               <span
                 style={{
-                  fontSize: '16px',
-                  fontWeight: 600,
-                  color: 'var(--color-text)',
-                  letterSpacing: '-0.01em',
+                  fontSize: '15px',
+                  fontWeight: 500,
+                  color: '#141414',
+                  letterSpacing: '-0.015em',
                 }}
               >
                 {item.question}
               </span>
               <span
                 style={{
-                  color: isOpen ? 'var(--color-primary)' : 'var(--color-text-muted)',
-                  display: 'flex',
+                  width: '28px',
+                  height: '28px',
+                  borderRadius: '999px',
+                  backgroundColor: '#ffffff',
+                  color: '#141414',
+                  display: 'inline-flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                  transition: 'transform 0.25s ease, color 0.2s ease',
+                  transform: isOpen ? 'rotate(45deg)' : 'rotate(0deg)',
+                  transition: 'transform 0.25s cubic-bezier(0.22, 1, 0.36, 1)',
                   flexShrink: 0,
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
                 }}
               >
-                <ChevronDown size={18} strokeWidth={2.2} />
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="1.8">
+                  <path d="M6 1v10M1 6h10" strokeLinecap="round" />
+                </svg>
               </span>
             </button>
 
@@ -105,16 +110,17 @@ export const Accordion: React.FC<AccordionProps> = ({
               style={{
                 display: 'grid',
                 gridTemplateRows: isOpen ? '1fr' : '0fr',
-                transition: 'grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
+                transition: 'grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1)',
               }}
             >
               <div style={{ overflow: 'hidden' }}>
                 <div
                   style={{
-                    padding: '0 24px 20px 24px',
-                    color: 'var(--color-text-muted)',
-                    fontSize: '15px',
+                    padding: '0 22px 20px 22px',
+                    color: '#525252',
+                    fontSize: '14px',
                     lineHeight: 1.6,
+                    maxWidth: '580px',
                   }}
                 >
                   {item.answer}
@@ -127,4 +133,3 @@ export const Accordion: React.FC<AccordionProps> = ({
     </div>
   );
 };
-

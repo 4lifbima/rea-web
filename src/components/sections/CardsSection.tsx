@@ -1,198 +1,211 @@
-﻿import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Wifi, ArrowRight } from 'lucide-react';
+import { SaroCardGraphic } from '../ui/SaroCardGraphic';
 
 export const CardsSection: React.FC = () => {
-  const [selectedColor, setSelectedColor] = useState<'obsidian' | 'silver' | 'cobalt'>('obsidian');
-
-  const cardStyles = {
-    obsidian: {
-      bg: 'linear-gradient(135deg, #1f1f1f 0%, #141414 100%)',
-      textColor: '#ffffff',
-      border: '1px solid #333333',
-      name: 'Obsidian Matte',
-    },
-    silver: {
-      bg: 'linear-gradient(135deg, #e0e0e0 0%, #c8c8c8 100%)',
-      textColor: '#141414',
-      border: '1px solid #b8b8b8',
-      name: 'Titanium Brushed',
-    },
-    cobalt: {
-      bg: 'linear-gradient(135deg, #0052d9 0%, #003399 100%)',
-      textColor: '#ffffff',
-      border: '1px solid #0044cc',
-      name: 'Cobalt Blue',
-    },
-  };
-
-  const currentStyle = cardStyles[selectedColor];
-
   return (
     <section
-      id="cards"
-      data-framer-name="Cards Unique"
+      id="saro-cards"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
-        backgroundColor: '#fafafa',
-        borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
+        padding: '48px 0 96px',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
         <div
           style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
-            gap: '56px',
-            alignItems: 'center',
+            backgroundColor: '#f7f7f7',
+            borderRadius: '32px',
+            padding: '72px 24px 0',
+            textAlign: 'center',
+            overflow: 'hidden',
+            position: 'relative',
           }}
         >
-          {/* Left Column: Visual Customizer Card Preview */}
+          {/* Top Centered Copy */}
           <div
             style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '24px',
-              border: '1px solid var(--color-border)',
-              padding: '40px',
-              boxShadow: 'var(--shadow-card)',
               display: 'flex',
               flexDirection: 'column',
               alignItems: 'center',
+              maxWidth: '580px',
+              margin: '0 auto 48px',
             }}
           >
-            {/* The Fintech Metal Card */}
-            <div
+            <div style={{ marginBottom: '20px' }}>
+              <Badge isNew iconType="clover-lime" label="Saro Cards" />
+            </div>
+
+            <h2
               style={{
-                width: '100%',
-                maxWidth: '360px',
-                height: '215px',
-                borderRadius: '16px',
-                background: currentStyle.bg,
-                color: currentStyle.textColor,
-                border: currentStyle.border,
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: '0 20px 40px rgba(0,0,0,0.18)',
-                transition: 'all 0.4s ease',
-                position: 'relative',
-                overflow: 'hidden',
-                marginBottom: '24px',
+                fontSize: 'clamp(2.35rem, 4.5vw, 3.5rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.04em',
+                lineHeight: 1.04,
+                color: '#141414',
+                marginBottom: '16px',
               }}
             >
-              {/* Card Top: Saro Logo & Contactless */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontSize: '18px', fontWeight: 700, letterSpacing: '-0.04em' }}>saro</span>
-                  <span style={{ fontSize: '10px', textTransform: 'uppercase', opacity: 0.7, letterSpacing: '0.08em' }}>Business</span>
-                </div>
-                <Wifi size={20} style={{ transform: 'rotate(90deg)', opacity: 0.8 }} />
-              </div>
-
-              {/* Card Chip */}
-              <div
-                style={{
-                  width: '36px',
-                  height: '28px',
-                  borderRadius: '6px',
-                  background: 'linear-gradient(135deg, #d4af37 0%, #aa820a 100%)',
-                  border: '1px solid #8e6c04',
-                }}
-              />
-
-              {/* Card Number & Holder */}
-              <div>
-                <div
-                  className="mono-num"
-                  style={{
-                    fontSize: '15px',
-                    letterSpacing: '0.15em',
-                    fontWeight: 600,
-                    marginBottom: '8px',
-                  }}
-                >
-                  â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ â€¢â€¢â€¢â€¢ 5530
-                </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', fontSize: '12px' }}>
-                  <div style={{ fontWeight: 600, letterSpacing: '0.04em', textTransform: 'uppercase' }}>
-                    Maya Chen
-                  </div>
-                  <div style={{ fontWeight: 600 }}>09/29</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Finish Selector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <span style={{ fontSize: '13px', color: '#707070', fontWeight: 500 }}>Color finish:</span>
-              <button
-                type="button"
-                onClick={() => setSelectedColor('obsidian')}
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: '50%',
-                  backgroundColor: '#141414',
-                  border: selectedColor === 'obsidian' ? '2px solid #0066ff' : '2px solid transparent',
-                  cursor: 'pointer',
-                }}
-                aria-label="Obsidian Finish"
-              />
-              <button
-                type="button"
-                onClick={() => setSelectedColor('silver')}
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: '50%',
-                  backgroundColor: '#d0d0d0',
-                  border: selectedColor === 'silver' ? '2px solid #0066ff' : '2px solid transparent',
-                  cursor: 'pointer',
-                }}
-                aria-label="Titanium Finish"
-              />
-              <button
-                type="button"
-                onClick={() => setSelectedColor('cobalt')}
-                style={{
-                  width: 24,
-                  height: 24,
-                  borderRadius: '50%',
-                  backgroundColor: '#0052d9',
-                  border: selectedColor === 'cobalt' ? '2px solid #0066ff' : '2px solid transparent',
-                  cursor: 'pointer',
-                }}
-                aria-label="Cobalt Finish"
-              />
-            </div>
-          </div>
-
-          {/* Right Column: Copy & Details */}
-          <div>
-            <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-              <Badge isNew label="Saro Cards" />
-            </div>
-            <h2 className="section-title" style={{ marginBottom: '20px' }}>
               Cards as unique as your team
             </h2>
-            <p className="section-description" style={{ marginBottom: '20px' }}>
-              Give every teammate a card that feels like theirs. Pick a colour, print a name and set the limits before it ships. Pay anywhere and withdraw cash while travelling, or go fully virtual and add it to your phoneâ€™s wallet in one tap.
+
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: 1.6,
+                color: '#525252',
+                maxWidth: '470px',
+                marginBottom: '10px',
+              }}
+            >
+              Pick a finish, add your logo and set the rules before the card even ships. Virtual cards are ready the second you click create.
             </p>
-            <p style={{ fontSize: '13px', color: '#adadad', marginBottom: '32px' }}>
+
+            <p
+              style={{
+                fontSize: '11.5px',
+                color: '#8a8a8a',
+                marginBottom: '26px',
+              }}
+            >
               Custom designs and delivery fees may apply on some plans.
             </p>
 
-            <Button to="/pricing" variant="primary" size="lg" iconRight={<ArrowRight size={16} />}>
+            <Button variant="primary" href="/contact" showChevron={false}>
               Order your cards
             </Button>
           </div>
+
+          {/* Bottom Visual: Center Phone Bezel + 3 Floating Tilted Saro Cards */}
+          <div
+            style={{
+              position: 'relative',
+              maxWidth: '820px',
+              height: '390px',
+              margin: '0 auto',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'flex-end',
+            }}
+          >
+            {/* Left Floating Lime Card */}
+            <motion.div
+              className="floating-card-left"
+              initial={{ opacity: 0, x: -30, rotate: -14 }}
+              whileInView={{ opacity: 1, x: 0, rotate: -10 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, rotate: -12 }}
+              transition={{ type: 'spring', stiffness: 180, damping: 18 }}
+              style={{
+                position: 'absolute',
+                left: '7%',
+                bottom: '44px',
+                zIndex: 3,
+              }}
+            >
+              <SaroCardGraphic variant="lime" last4="0219" size="md" />
+            </motion.div>
+
+            {/* Center iPhone Bezel */}
+            <div
+              style={{
+                width: '300px',
+                height: '380px',
+                backgroundColor: '#141414',
+                borderRadius: '44px 44px 0 0',
+                padding: '12px 12px 0',
+                boxShadow: '0 24px 60px rgba(0, 0, 0, 0.16)',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
+              {/* Dynamic Island */}
+              <div
+                style={{
+                  width: '84px',
+                  height: '22px',
+                  borderRadius: '999px',
+                  backgroundColor: '#0a0a0a',
+                  position: 'absolute',
+                  top: '22px',
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  zIndex: 4,
+                }}
+              />
+              <div
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  borderRadius: '34px 34px 0 0',
+                  overflow: 'hidden',
+                  backgroundColor: '#ffffff',
+                }}
+              >
+                <img
+                  src="/assets/images/nmf9TvYTdb9HZvcDVQmn2tMVy94.jpg"
+                  alt="Saro mobile app"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'top center',
+                    display: 'block',
+                  }}
+                />
+              </div>
+            </div>
+
+            {/* Top-Right Floating Blue Card */}
+            <motion.div
+              className="floating-card-right-top"
+              initial={{ opacity: 0, x: 30, rotate: 14 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 10 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -8, rotate: 12 }}
+              transition={{ type: 'spring', stiffness: 180, damping: 18, delay: 0.08 }}
+              style={{
+                position: 'absolute',
+                right: '8%',
+                bottom: '148px',
+                zIndex: 1,
+              }}
+            >
+              <SaroCardGraphic variant="blue" last4="5530" size="md" />
+            </motion.div>
+
+            {/* Bottom-Right Floating Black Card */}
+            <motion.div
+              className="floating-card-right-bottom"
+              initial={{ opacity: 0, x: 30, rotate: 8 }}
+              whileInView={{ opacity: 1, x: 0, rotate: 5 }}
+              viewport={{ once: true }}
+              whileHover={{ y: -6, rotate: 7 }}
+              transition={{ type: 'spring', stiffness: 180, damping: 18, delay: 0.14 }}
+              style={{
+                position: 'absolute',
+                right: '6%',
+                bottom: '22px',
+                zIndex: 3,
+              }}
+            >
+              <SaroCardGraphic variant="black" last4="8812" size="md" />
+            </motion.div>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .floating-card-left,
+          .floating-card-right-top,
+          .floating-card-right-bottom {
+            display: none !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
-

@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: 'sm' | 'md' | 'lg';
   to?: string;
   href?: string;
+  showChevron?: boolean;
   icon?: React.ReactNode;
   iconRight?: React.ReactNode;
   children: React.ReactNode;
@@ -16,6 +17,7 @@ export const Button: React.FC<ButtonProps> = ({
   size = 'md',
   to,
   href,
+  showChevron = false,
   icon,
   iconRight,
   children,
@@ -109,6 +111,9 @@ export const Button: React.FC<ButtonProps> = ({
         <span>{children}</span>
       )}
       {iconRight && <span style={{ display: 'inline-flex', alignItems: 'center' }}>{iconRight}</span>}
+      {showChevron && !iconRight && (
+        <span style={{ display: 'inline-flex', alignItems: 'center', opacity: 0.75 }}>›</span>
+      )}
     </>
   );
 
@@ -121,6 +126,20 @@ export const Button: React.FC<ButtonProps> = ({
   }
 
   if (href) {
+    if (href.startsWith('/')) {
+      return (
+        <Link to={href} style={combinedStyles} className={className}>
+          {content}
+        </Link>
+      );
+    }
+    if (href.startsWith('#')) {
+      return (
+        <a href={href} style={combinedStyles} className={className}>
+          {content}
+        </a>
+      );
+    }
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" style={combinedStyles} className={className}>
         {content}

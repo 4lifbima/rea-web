@@ -1,6 +1,47 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+interface SaroMarkProps {
+  size?: number;
+  bg?: string;
+  fg?: string;
+}
+
+export const SaroMark: React.FC<SaroMarkProps> = ({
+  size = 36,
+  bg = '#141414',
+  fg = '#ffffff',
+}) => (
+  <div
+    style={{
+      width: size,
+      height: size,
+      borderRadius: '50%',
+      backgroundColor: bg,
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      flexShrink: 0,
+    }}
+  >
+    <svg
+      width={size * 0.56}
+      height={size * 0.56}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M12 3.75V20.25M4.5 7.5L19.5 16.5M4.5 16.5L19.5 7.5"
+        stroke={fg}
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  </div>
+);
+
 interface SaroLogoProps {
   variant?: 'dark' | 'light';
   size?: 'sm' | 'md' | 'lg';
@@ -43,34 +84,7 @@ export const SaroLogo: React.FC<SaroLogoProps> = ({
       }}
       aria-label="Saro Home"
     >
-      <div
-        style={{
-          width: currentIconSize,
-          height: currentIconSize,
-          borderRadius: '50%',
-          backgroundColor: circleBg,
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          flexShrink: 0,
-        }}
-      >
-        <svg
-          width={currentIconSize * 0.56}
-          height={currentIconSize * 0.56}
-          viewBox="0 0 24 24"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M12 3.75V20.25M4.5 7.5L19.5 16.5M4.5 16.5L19.5 7.5"
-            stroke={strokeColor}
-            strokeWidth="2.6"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </div>
+      <SaroMark size={currentIconSize} bg={circleBg} fg={strokeColor} />
 
       {showText && (
         <span

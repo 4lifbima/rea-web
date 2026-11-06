@@ -1,219 +1,384 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Zap, ArrowRight } from 'lucide-react';
+
+const RESET_CYCLES = ['Every week', 'Every month', 'Every quarter'];
 
 export const AutomationsSection: React.FC = () => {
-  const [notifyMethod, setNotifyMethod] = useState<'Chat' | 'Email' | 'None'>('Chat');
-  const [threshold, setThreshold] = useState(10000);
+  const [limitVal, setLimitVal] = useState(78);
+  const [notifyChannel, setNotifyChannel] = useState<'Chat' | 'Email' | 'None'>('Chat');
+  const [resetIdx, setResetIdx] = useState(0);
 
   return (
     <section
       id="automations"
-      data-framer-name="Split Automations"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
-        backgroundColor: '#fafafa',
-        borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
+        padding: '96px 0',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
             gap: '56px',
             alignItems: 'center',
           }}
         >
-          {/* Left Column: Interactive Automation Rule Builder */}
+          {/* Left Column: Dark Radial Glow Card */}
           <div
             style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '24px',
-              border: '1px solid var(--color-border)',
+              background: 'radial-gradient(circle at 26% 52%, #003b95 0%, #0d0f14 68%)',
+              borderRadius: '28px',
               padding: '32px',
-              boxShadow: 'var(--shadow-card)',
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
+              gap: '24px',
+              alignItems: 'center',
+              color: '#ffffff',
+              boxShadow: '0 20px 44px rgba(0, 0, 0, 0.14)',
             }}
           >
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span
-                  style={{
-                    padding: '6px',
-                    borderRadius: '8px',
-                    backgroundColor: '#e7f6ee',
-                    color: '#12a150',
-                    display: 'flex',
-                  }}
-                >
-                  <Zap size={16} />
-                </span>
-                <span style={{ fontSize: '14px', fontWeight: 700, color: '#141414' }}>Active Workflow Rule</span>
-              </div>
-              <span
+            {/* Left Inside: Giant 3D Glossy Blue Lightning Squircle */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                padding: '24px 0',
+              }}
+            >
+              <div
+                className="saro-squircle"
                 style={{
-                  fontSize: '11px',
-                  fontWeight: 600,
-                  color: '#12a150',
-                  backgroundColor: '#e7f6ee',
-                  padding: '2px 8px',
-                  borderRadius: '4px',
+                  width: '124px',
+                  height: '124px',
+                  borderRadius: '30px',
+                  backgroundColor: '#0066ff',
+                  boxShadow:
+                    '0 24px 60px rgba(0, 102, 255, 0.55), inset 0 2px 3px rgba(255, 255, 255, 0.45), inset 0 -4px 8px rgba(0, 0, 0, 0.25)',
                 }}
               >
-                Auto-enforced
-              </span>
+                <svg
+                  width="54"
+                  height="54"
+                  viewBox="0 0 24 24"
+                  fill="#ffffff"
+                  style={{ position: 'relative', zIndex: 2 }}
+                >
+                  <path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z" />
+                </svg>
+              </div>
             </div>
 
-            {/* Threshold Slider / Input */}
-            <div
-              style={{
-                backgroundColor: '#f7f7f7',
-                borderRadius: '14px',
-                padding: '16px',
-                marginBottom: '16px',
-                border: '1px solid #ebebeb',
-              }}
-            >
-              <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: '#707070', marginBottom: '8px' }}>
-                <span>Trigger: Payments over amount</span>
-                <span className="mono-num" style={{ fontWeight: 700, color: '#141414', fontSize: '15px' }}>
-                  ${threshold.toLocaleString()}
-                </span>
+            {/* Right Inside: 5 Glass Rule Cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {/* 1. RULE */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                }}
+              >
+                <div
+                  style={{
+                    fontSize: '9px',
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.08em',
+                    color: 'rgba(255,255,255,0.45)',
+                    textTransform: 'uppercase',
+                    marginBottom: '4px',
+                  }}
+                >
+                  RULE
+                </div>
+                <div style={{ fontSize: '13.5px', fontWeight: 500, color: '#ffffff' }}>
+                  Payments over $10,000
+                </div>
               </div>
-              <input
-                type="range"
-                min="1000"
-                max="50000"
-                step="1000"
-                value={threshold}
-                onChange={(e) => setThreshold(Number(e.target.value))}
-                style={{ width: '100%', accentColor: 'var(--color-primary)', cursor: 'pointer' }}
-              />
-            </div>
 
-            {/* Approvers List */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '14px 16px',
-                backgroundColor: '#f7f7f7',
-                borderRadius: '12px',
-                marginBottom: '16px',
-                border: '1px solid #ebebeb',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>Designated Approvers</div>
-                <div style={{ fontSize: '11px', color: '#707070' }}>Requires 2 of 4 authorizations</div>
-              </div>
-              <div style={{ display: 'flex', alignItems: 'center' }}>
-                {['LM', 'JK', 'AR', '+2'].map((initials, idx) => (
+              {/* 2. AUTO-APPROVE LIMIT */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '12px 14px',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    marginBottom: '8px',
+                  }}
+                >
                   <span
-                    key={idx}
                     style={{
-                      width: 28,
-                      height: 28,
-                      borderRadius: '50%',
-                      backgroundColor: idx === 3 ? '#141414' : '#0066ff',
-                      color: '#ffffff',
-                      fontSize: '10px',
-                      fontWeight: 700,
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginLeft: idx > 0 ? '-6px' : '0',
-                      border: '2px solid #ffffff',
+                      fontSize: '9px',
+                      fontFamily: 'var(--font-mono)',
+                      letterSpacing: '0.08em',
+                      color: 'rgba(255,255,255,0.45)',
+                      textTransform: 'uppercase',
                     }}
                   >
-                    {initials}
+                    AUTO-APPROVE LIMIT
                   </span>
-                ))}
-              </div>
-            </div>
-
-            {/* Notification Channel Picker */}
-            <div
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-                padding: '14px 16px',
-                backgroundColor: '#f7f7f7',
-                borderRadius: '12px',
-                border: '1px solid #ebebeb',
-              }}
-            >
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>Notification Channel</div>
-              <div style={{ display: 'flex', gap: '6px' }}>
-                {(['Chat', 'Email', 'None'] as const).map((method) => (
-                  <button
-                    key={method}
-                    type="button"
-                    onClick={() => setNotifyMethod(method)}
+                  <span
                     style={{
-                      padding: '4px 10px',
-                      borderRadius: '6px',
-                      fontSize: '12px',
-                      fontWeight: 500,
-                      backgroundColor: notifyMethod === method ? '#141414' : '#ffffff',
-                      color: notifyMethod === method ? '#ffffff' : '#707070',
-                      border: '1px solid #dcdcdc',
-                      cursor: 'pointer',
+                      fontSize: '11px',
+                      fontFamily: 'var(--font-mono)',
+                      color: '#ffffff',
+                      fontWeight: 600,
                     }}
                   >
-                    {method}
-                  </button>
-                ))}
+                    {limitVal}/100
+                  </span>
+                </div>
+                <input
+                  type="range"
+                  min={10}
+                  max={100}
+                  value={limitVal}
+                  onChange={(e) => setLimitVal(Number(e.target.value))}
+                  aria-label="Auto-approve limit"
+                  style={{
+                    width: '100%',
+                    accentColor: '#0066ff',
+                    height: '5px',
+                    cursor: 'pointer',
+                  }}
+                />
+              </div>
+
+              {/* 3. APPROVERS */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '10px 14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '9px',
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.08em',
+                    color: 'rgba(255,255,255,0.45)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  APPROVERS
+                </span>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {[
+                    { initials: 'LM', bg: '#ccff00', color: '#141414' },
+                    { initials: 'JK', bg: '#2ee6c5', color: '#141414' },
+                    { initials: 'AR', bg: '#ff6b1a', color: '#ffffff' },
+                    { initials: '+2', bg: '#2b2e36', color: '#ffffff' },
+                  ].map((av, i) => (
+                    <span
+                      key={av.initials}
+                      style={{
+                        width: '24px',
+                        height: '24px',
+                        borderRadius: '999px',
+                        backgroundColor: av.bg,
+                        color: av.color,
+                        fontSize: '9.5px',
+                        fontWeight: 700,
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        marginLeft: i === 0 ? 0 : '-6px',
+                        border: '2px solid #14171f',
+                      }}
+                    >
+                      {av.initials}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* 4. NOTIFY */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '10px 14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '9px',
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.08em',
+                    color: 'rgba(255,255,255,0.45)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  NOTIFY
+                </span>
+                <div style={{ display: 'flex', gap: '4px' }}>
+                  {(['Chat', 'Email', 'None'] as const).map((ch) => {
+                    const active = notifyChannel === ch;
+                    return (
+                      <button
+                        key={ch}
+                        type="button"
+                        onClick={() => setNotifyChannel(ch)}
+                        style={{
+                          padding: '4px 9px',
+                          borderRadius: '999px',
+                          backgroundColor: active ? '#ffffff' : 'rgba(255,255,255,0.08)',
+                          color: active ? '#141414' : 'rgba(255,255,255,0.75)',
+                          fontSize: '10.5px',
+                          fontWeight: 600,
+                          border: 'none',
+                          cursor: 'pointer',
+                        }}
+                      >
+                        {ch}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 5. RESET LIMIT */}
+              <div
+                style={{
+                  backgroundColor: 'rgba(255, 255, 255, 0.06)',
+                  border: '1px solid rgba(255, 255, 255, 0.08)',
+                  borderRadius: '14px',
+                  padding: '10px 14px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'space-between',
+                }}
+              >
+                <span
+                  style={{
+                    fontSize: '9px',
+                    fontFamily: 'var(--font-mono)',
+                    letterSpacing: '0.08em',
+                    color: 'rgba(255,255,255,0.45)',
+                    textTransform: 'uppercase',
+                  }}
+                >
+                  RESET LIMIT
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setResetIdx((prev) => (prev + 1) % RESET_CYCLES.length)}
+                  style={{
+                    padding: '4px 10px',
+                    borderRadius: '8px',
+                    backgroundColor: 'rgba(255,255,255,0.08)',
+                    color: '#ffffff',
+                    fontSize: '11px',
+                    fontWeight: 500,
+                    border: 'none',
+                    cursor: 'pointer',
+                  }}
+                >
+                  {RESET_CYCLES[resetIdx]} ⌄
+                </button>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Text & Metrics */}
+          {/* Right Column: Copy + Stats */}
           <div>
-            <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-              <Badge number="4" label="Automations" />
+            <div style={{ marginBottom: '20px' }}>
+              <Badge number="4" iconType="clover-mint" label="Automations" />
             </div>
-            <h2 className="section-title" style={{ marginBottom: '20px' }}>
-              Approvals that run themselves.
-            </h2>
-            <p className="section-description" style={{ marginBottom: '32px' }}>
-              Set rules once and let Saro route every payment. Spend limits, approvers and alerts update in real time, with no code and no follow-up emails.
-            </p>
 
-            {/* Quantifiable Proof Stats */}
-            <div
+            <h2
               style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(2, 1fr)',
-                gap: '24px',
-                marginBottom: '36px',
+                fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.04em',
+                lineHeight: 1.05,
+                color: '#141414',
+                marginBottom: '18px',
+                maxWidth: '420px',
               }}
             >
-              <div style={{ borderLeft: '3px solid var(--color-primary)', paddingLeft: '16px' }}>
-                <div className="mono-num" style={{ fontSize: '36px', fontWeight: 700, color: '#141414', lineHeight: 1 }}>
+              Approvals that run themselves.
+            </h2>
+
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: 1.6,
+                color: '#525252',
+                maxWidth: '420px',
+                marginBottom: '32px',
+              }}
+            >
+              Set rules once by amount, vendor or team. Small spend goes through instantly and big spend routes to the right person.
+            </p>
+
+            {/* 2 Stats with vertical divider */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '32px',
+                marginBottom: '32px',
+              }}
+            >
+              <div>
+                <div
+                  style={{
+                    fontSize: '38px',
+                    fontWeight: 500,
+                    letterSpacing: '-0.04em',
+                    color: '#141414',
+                    lineHeight: 1.05,
+                  }}
+                >
                   4x
                 </div>
-                <div style={{ fontSize: '14px', color: '#707070', marginTop: '6px' }}>
-                  faster approval cycles
+                <div style={{ fontSize: '13px', color: '#7a7a7a', marginTop: '4px' }}>
+                  faster approvals
                 </div>
               </div>
 
-              <div style={{ borderLeft: '3px solid #12a150', paddingLeft: '16px' }}>
-                <div className="mono-num" style={{ fontSize: '36px', fontWeight: 700, color: '#141414', lineHeight: 1 }}>
+              <div style={{ width: '1px', height: '48px', backgroundColor: '#e5e5e5' }} />
+
+              <div>
+                <div
+                  style={{
+                    fontSize: '38px',
+                    fontWeight: 500,
+                    letterSpacing: '-0.04em',
+                    color: '#141414',
+                    lineHeight: 1.05,
+                  }}
+                >
                   92%
                 </div>
-                <div style={{ fontSize: '14px', color: '#707070', marginTop: '6px' }}>
-                  less manual finance review
+                <div style={{ fontSize: '13px', color: '#7a7a7a', marginTop: '4px' }}>
+                  less manual review
                 </div>
               </div>
             </div>
 
-            <Button to="/solutions#automations" variant="secondary" size="md" iconRight={<ArrowRight size={16} />}>
+            <Button variant="secondary" href="/contact" showChevron>
               Explore automations
             </Button>
           </div>

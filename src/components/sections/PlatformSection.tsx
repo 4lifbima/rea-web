@@ -1,16 +1,30 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Landmark, Plus } from 'lucide-react';
 import { Badge } from '../ui/Badge';
-import { CheckCircle2 } from 'lucide-react';
+import { SaroCardGraphic } from '../ui/SaroCardGraphic';
 
 export const PlatformSection: React.FC = () => {
-  const transactions = [
-    { name: 'Pairboard', type: 'Design tools', amount: '-$45.00', positive: false },
-    { name: 'Stackpad', type: 'Hosting infrastructure', amount: '-$96.00', positive: false },
-    { name: 'Orbit payout', type: 'Client invoice #1042', amount: '+$12,480.00', positive: true },
-    { name: 'Ridely', type: 'Ride & ground transit', amount: '-$23.40', positive: false },
-    { name: 'Cloudhaus', type: 'Dedicated GPU compute', amount: '-$3,210.44', positive: false },
-    { name: 'Lumen Studio', type: 'Subscription revenue', amount: '+$9,800.00', positive: true },
-    { name: 'Gusto payroll', type: 'Bi-weekly team payroll', amount: '-$86,400.00', positive: false },
+  const spendingRows = [
+    { name: 'Pairboard', amount: '-$45.00', positive: false, opacity: 1 },
+    { name: 'Stackpad', amount: '-$96.00', positive: false, opacity: 1 },
+    { name: 'Orbit payout', amount: '+$12,480.00', positive: true, opacity: 1 },
+    { name: 'Ridely', amount: '-$23.40', positive: false, opacity: 0.72 },
+    { name: 'Cloudhaus', amount: '-$3,210.44', positive: false, opacity: 0.45 },
+    { name: 'Lumen Studio', amount: '+$9,800.00', positive: true, opacity: 0.25 },
+  ];
+
+  const forecastBars = [
+    { h: 42, color: '#0066ff' },
+    { h: 52, color: '#0066ff' },
+    { h: 47, color: '#0066ff' },
+    { h: 62, color: '#0066ff' },
+    { h: 56, color: '#0066ff' },
+    { h: 70, color: '#0066ff' },
+    { h: 77, color: '#b3d1ff' },
+    { h: 84, color: '#b3d1ff' },
+    { h: 94, color: '#b3d1ff' },
   ];
 
   return (
@@ -18,334 +32,455 @@ export const PlatformSection: React.FC = () => {
       id="platform"
       data-framer-name="Features"
       style={{
-        paddingTop: '80px',
-        paddingBottom: '96px',
+        paddingTop: '88px',
+        paddingBottom: '104px',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
-        {/* Section Header */}
+        {/* Centered Header */}
         <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-            <Badge number="1" label="Platform" />
+          <div style={{ display: 'inline-flex', marginBottom: '18px' }}>
+            <Badge number="1" iconType="grid-blue" label="Platform" />
           </div>
           <h2 className="section-title" style={{ marginBottom: '16px' }}>
             Every Flow, One Calm Panel
           </h2>
-          <p className="section-description" style={{ margin: '0 auto' }}>
+          <p className="section-description" style={{ margin: '0 auto', maxWidth: '460px' }}>
             Track spending, connect your banks, issue cards and see what’s next, all from one place.
           </p>
         </div>
 
-        {/* 4 Feature Cards Bento Grid */}
+        {/* 4 Equal Vertical Cards */}
         <div
+          className="saro-platform-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(12, 1fr)',
-            gap: '24px',
+            gridTemplateColumns: 'repeat(4, 1fr)',
+            gap: '18px',
           }}
         >
-          {/* Card 1: Track daily Spending (Col span 7) */}
-          <div
+          {/* Card 1: Spending */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45 }}
             style={{
-              gridColumn: 'span 7',
-              backgroundColor: '#ffffff',
-              borderRadius: '20px',
-              border: '1px solid var(--color-border)',
-              padding: '32px',
-              boxShadow: 'var(--shadow-card)',
+              backgroundColor: '#f7f7f7',
+              borderRadius: '24px',
+              padding: '28px 24px',
+              height: '416px',
+              position: 'relative',
+              overflow: 'hidden',
               display: 'flex',
               flexDirection: 'column',
               justifyContent: 'space-between',
-              minHeight: '380px',
             }}
-            className="feature-card-col-7"
           >
             <div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: 'var(--color-primary)', textTransform: 'uppercase', marginBottom: '6px' }}>
-                Realtime Ledger
+              <div style={{ fontSize: '12.5px', color: '#707070', marginBottom: '4px' }}>
+                Track your daily
               </div>
-              <h3 style={{ fontSize: '22px', fontWeight: 600, color: '#141414', marginBottom: '8px' }}>
-                Track your daily Spending
+              <h3 style={{ fontSize: '23px', fontWeight: 500, letterSpacing: '-0.03em', color: '#141414' }}>
+                Spending
               </h3>
-              <p style={{ fontSize: '14px', color: '#707070', lineHeight: 1.5, marginBottom: '24px' }}>
-                Every card swipe, wire, and direct debit automatically tagged and categorized with zero latency.
-              </p>
             </div>
 
-            {/* Micro transaction list */}
-            <div
-              style={{
-                backgroundColor: '#f7f7f7',
-                borderRadius: '14px',
-                padding: '12px 16px',
-                border: '1px solid #ebebeb',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                maxHeight: '220px',
-                overflowY: 'auto',
-              }}
-            >
-              {transactions.slice(0, 5).map((tx, idx) => (
+            <div style={{ display: 'flex', flexDirection: 'column', marginTop: '20px' }}>
+              {spendingRows.map((row, idx) => (
                 <div
-                  key={idx}
+                  key={row.name}
                   style={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'space-between',
-                    padding: '8px 12px',
-                    borderRadius: '8px',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #f0f0f0',
+                    padding: '11px 0',
+                    borderBottom: idx < spendingRows.length - 1 ? '1px solid #ececec' : 'none',
+                    opacity: row.opacity,
                   }}
                 >
-                  <div>
-                    <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>{tx.name}</div>
-                    <div style={{ fontSize: '11px', color: '#707070' }}>{tx.type}</div>
-                  </div>
-                  <div
+                  <span style={{ fontSize: '13.5px', fontWeight: 500, color: '#141414' }}>
+                    {row.name}
+                  </span>
+                  <span
                     className="mono-num"
                     style={{
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      color: tx.positive ? '#12a150' : '#141414',
+                      fontSize: '12.5px',
+                      fontWeight: 500,
+                      color: row.positive ? '#12a150' : '#707070',
                     }}
                   >
-                    {tx.amount}
-                  </div>
+                    {row.amount}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
 
-          {/* Card 2: Connect all your Bank Accounts (Col span 5) */}
-          <div
-            style={{
-              gridColumn: 'span 5',
-              backgroundColor: '#ffffff',
-              borderRadius: '20px',
-              border: '1px solid var(--color-border)',
-              padding: '32px',
-              boxShadow: 'var(--shadow-card)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              minHeight: '380px',
-            }}
-            className="feature-card-col-5"
-          >
-            <div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#ff6b1a', textTransform: 'uppercase', marginBottom: '6px' }}>
-                Unified Accounts
-              </div>
-              <h3 style={{ fontSize: '22px', fontWeight: 600, color: '#141414', marginBottom: '8px' }}>
-                Connect all your Bank Accounts
-              </h3>
-              <p style={{ fontSize: '14px', color: '#707070', lineHeight: 1.5, marginBottom: '24px' }}>
-                Live balances across 12,000+ banks worldwide in one single secure view.
-              </p>
-            </div>
-
-            {/* Bank Card Preview */}
-            <div
+            <Link
+              to="/#suite"
+              aria-label="Learn more about Spending"
               style={{
-                backgroundColor: '#141414',
-                color: '#ffffff',
-                borderRadius: '16px',
-                padding: '24px',
-                position: 'relative',
-                overflow: 'hidden',
+                position: 'absolute',
+                right: '16px',
+                bottom: '16px',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ebebeb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#141414',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '24px' }}>
-                <div>
-                  <div style={{ fontSize: '12px', color: '#adadad' }}>Main Operating Checking</div>
-                  <div style={{ fontSize: '13px', fontWeight: 500, color: '#ffffff' }}>Chase Business •••• 4021</div>
-                </div>
-                <span
-                  style={{
-                    fontSize: '10px',
-                    fontWeight: 600,
-                    color: '#00d64f',
-                    backgroundColor: 'rgba(0, 214, 79, 0.15)',
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                  }}
-                >
-                  Synced just now
-                </span>
+              <Plus size={15} />
+            </Link>
+          </motion.div>
+
+          {/* Card 2: Bank Accounts */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: 0.06 }}
+            style={{
+              backgroundColor: '#f7f7f7',
+              borderRadius: '24px',
+              padding: '28px 24px',
+              height: '416px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div style={{ marginBottom: '44px' }}>
+              <div style={{ fontSize: '12.5px', color: '#707070', marginBottom: '4px' }}>
+                Connect all your
               </div>
+              <h3 style={{ fontSize: '23px', fontWeight: 500, letterSpacing: '-0.03em', color: '#141414' }}>
+                Bank Accounts
+              </h3>
+            </div>
+
+            {/* Stacked Bank Account Cards */}
+            <div style={{ position: 'relative', width: '100%' }}>
+              {/* Bottom Stack Shadow 2 */}
               <div
-                className="mono-num"
                 style={{
-                  fontSize: '28px',
-                  fontWeight: 700,
-                  letterSpacing: '-0.02em',
-                  marginBottom: '12px',
+                  position: 'absolute',
+                  left: '22px',
+                  right: '22px',
+                  bottom: '-22px',
+                  height: '40px',
+                  backgroundColor: '#ececec',
+                  borderRadius: '16px',
+                }}
+              />
+              {/* Bottom Stack Shadow 1 */}
+              <div
+                style={{
+                  position: 'absolute',
+                  left: '11px',
+                  right: '11px',
+                  bottom: '-11px',
+                  height: '40px',
+                  backgroundColor: '#f2f2f2',
+                  borderRadius: '16px',
+                  border: '1px solid #e9e9e9',
+                }}
+              />
+
+              {/* Front White Card */}
+              <div
+                style={{
+                  position: 'relative',
+                  backgroundColor: '#ffffff',
+                  borderRadius: '18px',
+                  padding: '20px',
+                  border: '1px solid #ededed',
+                  boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
                 }}
               >
-                $842,120.00
-              </div>
-              <div style={{ fontSize: '11px', color: '#707070', display: 'flex', alignItems: 'center', gap: '6px' }}>
-                <CheckCircle2 size={13} color="#12a150" />
-                <span>FDIC insured up to $2.5M across sweep network</span>
-              </div>
-            </div>
-          </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
+                  <div
+                    style={{
+                      width: '32px',
+                      height: '32px',
+                      borderRadius: '50%',
+                      backgroundColor: '#141414',
+                      color: '#ffffff',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Landmark size={15} />
+                  </div>
+                  <div>
+                    <div style={{ fontSize: '13.5px', fontWeight: 500, color: '#141414', lineHeight: 1.2 }}>
+                      Main Checking
+                    </div>
+                    <div className="mono-num" style={{ fontSize: '11px', color: '#adadad' }}>
+                      •••• 4021
+                    </div>
+                  </div>
+                </div>
 
-          {/* Card 3: Issue your team’s Smart Cards (Col span 5) */}
-          <div
-            style={{
-              gridColumn: 'span 5',
-              backgroundColor: '#ffffff',
-              borderRadius: '20px',
-              border: '1px solid var(--color-border)',
-              padding: '32px',
-              boxShadow: 'var(--shadow-card)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              minHeight: '360px',
-            }}
-            className="feature-card-col-5"
-          >
-            <div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#12a150', textTransform: 'uppercase', marginBottom: '6px' }}>
-                Instant Issuance
-              </div>
-              <h3 style={{ fontSize: '22px', fontWeight: 600, color: '#141414', marginBottom: '8px' }}>
-                Issue your team’s Smart Cards
-              </h3>
-              <p style={{ fontSize: '14px', color: '#707070', lineHeight: 1.5, marginBottom: '20px' }}>
-                Virtual & physical cards with spending rules and vendor limits baked directly in.
-              </p>
-            </div>
-
-            {/* Overlapping mini cards visual */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '8px',
-                backgroundColor: '#f7f7f7',
-                padding: '16px',
-                borderRadius: '14px',
-              }}
-            >
-              {[
-                { name: 'Elena Rossi · Marketing', last4: '0219', limit: '$5,000 / mo', color: '#141414' },
-                { name: 'DevOps & AWS Cloud', last4: '5530', limit: '$15,000 / mo', color: '#0066ff' },
-                { name: 'Marcus Chen · Exec Card', last4: '8812', limit: 'No limit', color: '#262626' },
-              ].map((c, i) => (
                 <div
-                  key={i}
                   style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
-                    padding: '10px 14px',
-                    borderRadius: '10px',
-                    backgroundColor: '#ffffff',
-                    border: '1px solid #ebebeb',
+                    fontSize: '21px',
+                    fontWeight: 500,
+                    letterSpacing: '-0.02em',
+                    color: '#141414',
+                    marginBottom: '16px',
                   }}
                 >
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div
-                      style={{
-                        width: 28,
-                        height: 18,
-                        borderRadius: '4px',
-                        backgroundColor: c.color,
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#fff',
-                        fontSize: '8px',
-                        fontWeight: 700,
-                      }}
-                    >
-                      saro
-                    </div>
-                    <div>
-                      <div style={{ fontSize: '12px', fontWeight: 600, color: '#141414' }}>{c.name}</div>
-                      <div style={{ fontSize: '11px', color: '#707070' }}>•••• {c.last4}</div>
-                    </div>
-                  </div>
-                  <div style={{ fontSize: '11px', fontWeight: 600, color: '#12a150', backgroundColor: '#e7f6ee', padding: '2px 8px', borderRadius: '4px' }}>
-                    {c.limit}
-                  </div>
+                  $842,120.00
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Card 4: Plan ahead with Cash Forecasts (Col span 7) */}
-          <div
-            style={{
-              gridColumn: 'span 7',
-              backgroundColor: '#ffffff',
-              borderRadius: '20px',
-              border: '1px solid var(--color-border)',
-              padding: '32px',
-              boxShadow: 'var(--shadow-card)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              minHeight: '360px',
-            }}
-            className="feature-card-col-7"
-          >
-            <div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#7e22ce', textTransform: 'uppercase', marginBottom: '6px' }}>
-                Forecasting
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '11.5px', color: '#707070' }}>
+                  <span
+                    style={{
+                      width: '6px',
+                      height: '6px',
+                      borderRadius: '50%',
+                      backgroundColor: '#00d64f',
+                    }}
+                  />
+                  <span>Synced just now</span>
+                </div>
               </div>
-              <h3 style={{ fontSize: '22px', fontWeight: 600, color: '#141414', marginBottom: '8px' }}>
-                Plan ahead with Cash Forecasts
-              </h3>
-              <p style={{ fontSize: '14px', color: '#707070', lineHeight: 1.5, marginBottom: '24px' }}>
-                Automatic scenario modeling based on historical revenue, payroll, and known recurring liabilities.
-              </p>
             </div>
 
-            <div
+            <Link
+              to="/#tour"
+              aria-label="Learn more about Bank Accounts"
               style={{
-                backgroundColor: '#fbfbfb',
-                borderRadius: '16px',
-                padding: '20px',
+                position: 'absolute',
+                right: '16px',
+                bottom: '16px',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
                 border: '1px solid #ebebeb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#141414',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
               }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
-                <div>
-                  <div style={{ fontSize: '12px', color: '#707070' }}>Cash forecast · 90 days projected net</div>
-                  <div
-                    className="mono-num"
-                    style={{ fontSize: '26px', fontWeight: 700, color: '#12a150' }}
-                  >
-                    +$1.24M
-                  </div>
-                </div>
-                <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontSize: '12px', color: '#707070' }}>Runway confidence</div>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414' }}>
-                    34 Months (Conservative)
-                  </div>
-                </div>
+              <Plus size={15} />
+            </Link>
+          </motion.div>
+
+          {/* Card 3: Smart Cards */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: 0.12 }}
+            style={{
+              backgroundColor: '#f7f7f7',
+              borderRadius: '24px',
+              padding: '28px 24px',
+              height: '416px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div>
+              <div style={{ fontSize: '12.5px', color: '#707070', marginBottom: '4px' }}>
+                Issue your team’s
+              </div>
+              <h3 style={{ fontSize: '23px', fontWeight: 500, letterSpacing: '-0.03em', color: '#141414' }}>
+                Smart Cards
+              </h3>
+            </div>
+
+            {/* 3 Fanned Physical Saro Cards */}
+            <div style={{ position: 'relative', flex: 1, marginTop: '24px' }}>
+              <SaroCardGraphic
+                color="lime"
+                last4="0219"
+                width={175}
+                height={110}
+                style={{
+                  position: 'absolute',
+                  top: '6px',
+                  right: '4px',
+                  transform: 'rotate(16deg)',
+                }}
+              />
+              <SaroCardGraphic
+                color="blue"
+                last4="5530"
+                width={175}
+                height={110}
+                style={{
+                  position: 'absolute',
+                  top: '38px',
+                  left: '4px',
+                  transform: 'rotate(-6deg)',
+                  zIndex: 2,
+                }}
+              />
+              <SaroCardGraphic
+                color="black"
+                last4="8812"
+                width={182}
+                height={114}
+                style={{
+                  position: 'absolute',
+                  top: '76px',
+                  left: '18px',
+                  transform: 'rotate(3deg)',
+                  zIndex: 3,
+                }}
+              />
+            </div>
+
+            <Link
+              to="/#cards"
+              aria-label="Learn more about Smart Cards"
+              style={{
+                position: 'absolute',
+                right: '16px',
+                bottom: '16px',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ebebeb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#141414',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                zIndex: 4,
+              }}
+            >
+              <Plus size={15} />
+            </Link>
+          </motion.div>
+
+          {/* Card 4: Cash Forecasts */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.45, delay: 0.18 }}
+            style={{
+              backgroundColor: '#f7f7f7',
+              borderRadius: '24px',
+              padding: '28px 0 28px 24px',
+              height: '416px',
+              position: 'relative',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+            <div style={{ paddingRight: '24px', marginBottom: '44px' }}>
+              <div style={{ fontSize: '12.5px', color: '#707070', marginBottom: '4px' }}>
+                Plan ahead with
+              </div>
+              <h3 style={{ fontSize: '23px', fontWeight: 500, letterSpacing: '-0.03em', color: '#141414' }}>
+                Cash Forecasts
+              </h3>
+            </div>
+
+            {/* White Forecast Chart Card */}
+            <div
+              style={{
+                backgroundColor: '#ffffff',
+                borderRadius: '18px 0 0 18px',
+                padding: '18px 16px 16px 18px',
+                border: '1px solid #ededed',
+                borderRight: 'none',
+                boxShadow: '0 8px 24px rgba(0, 0, 0, 0.04)',
+              }}
+            >
+              <div style={{ fontSize: '11.5px', color: '#707070', marginBottom: '4px' }}>
+                Cash forecast · 90 days
+              </div>
+              <div
+                style={{
+                  fontSize: '20px',
+                  fontWeight: 500,
+                  letterSpacing: '-0.02em',
+                  color: '#141414',
+                  marginBottom: '18px',
+                }}
+              >
+                +$1.24M
               </div>
 
-              {/* Progress runway bar */}
-              <div style={{ width: '100%', height: '8px', backgroundColor: '#ebebeb', borderRadius: '4px', overflow: 'hidden' }}>
-                <div style={{ width: '82%', height: '100%', backgroundColor: '#12a150', borderRadius: '4px' }} />
+              {/* 9 Vertical Bars */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  gap: '6px',
+                  height: '96px',
+                }}
+              >
+                {forecastBars.map((bar, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      flex: 1,
+                      height: `${bar.h}px`,
+                      backgroundColor: bar.color,
+                      borderRadius: '5px',
+                    }}
+                  />
+                ))}
               </div>
             </div>
-          </div>
+
+            <Link
+              to="/#platform"
+              aria-label="Learn more about Cash Forecasts"
+              style={{
+                position: 'absolute',
+                right: '16px',
+                bottom: '16px',
+                width: '30px',
+                height: '30px',
+                borderRadius: '50%',
+                backgroundColor: '#ffffff',
+                border: '1px solid #ebebeb',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                color: '#141414',
+                boxShadow: '0 2px 6px rgba(0,0,0,0.04)',
+                zIndex: 4,
+              }}
+            >
+              <Plus size={15} />
+            </Link>
+          </motion.div>
         </div>
       </div>
 
       <style>{`
-        @media (max-width: 900px) {
-          .feature-card-col-7, .feature-card-col-5 {
-            grid-column: span 12 !important;
+        @media (max-width: 1024px) {
+          .saro-platform-grid {
+            grid-template-columns: repeat(2, 1fr) !important;
+          }
+        }
+        @media (max-width: 580px) {
+          .saro-platform-grid {
+            grid-template-columns: 1fr !important;
           }
         }
       `}</style>

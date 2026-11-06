@@ -1,232 +1,378 @@
-﻿import React from 'react';
+import React, { useState } from 'react';
 import { Badge } from '../ui/Badge';
-import { Plus, Download } from 'lucide-react';
+
+const SIDEBAR_ITEMS = [
+  { label: 'Overview', icon: '○' },
+  { label: 'Payments', icon: '⇄' },
+  { label: 'Spaces', icon: '⊞' },
+  { label: 'Accounts', icon: '🏦' },
+  { label: 'Cards', icon: '▭' },
+  { label: 'Members', icon: '☺' },
+  { label: 'Approvals', icon: '✓', badge: 'New' },
+];
+
+const SPACES = [
+  {
+    name: 'Operations',
+    stat: '$1.2M',
+    image: '/assets/images/kuXh3488tQVxrtoQDCfvOpDwF8.jpg',
+  },
+  {
+    name: 'Treasury',
+    stat: '$4.8M',
+    image: '/assets/images/OomzvRN6BSbeBP3tR8upG6krwxA.jpg',
+  },
+  {
+    name: 'Cards',
+    stat: '312 active',
+    image: '/assets/images/8LFomEpfsMeDLIm17nCGhzBYZQ.jpg',
+  },
+];
 
 export const WorkspaceSection: React.FC = () => {
+  const [activeNav, setActiveNav] = useState('Spaces');
+
   return (
     <section
       id="workspace"
-      data-framer-name="Workspace Scroll"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
+        padding: '96px 0',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
-        {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-            <Badge number="7" label="Workspace" />
-          </div>
-          <h2 className="section-title" style={{ marginBottom: '16px' }}>
-            Bring every account, card and payout into one calm workspace.
-          </h2>
-          <p className="section-description" style={{ margin: '0 auto' }}>
-            Group your balances, configure team spaces, and run entire corporate treasuries without ever leaving one unified screen.
-          </p>
-        </div>
-
-        {/* High-Fidelity Workspace Mockup */}
         <div
           style={{
-            maxWidth: '1060px',
-            margin: '0 auto',
-            borderRadius: '24px',
-            backgroundColor: '#ffffff',
-            border: '1px solid var(--color-border)',
-            boxShadow: 'var(--shadow-card)',
-            overflow: 'hidden',
             display: 'grid',
-            gridTemplateColumns: '240px 1fr',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
+            gap: '48px',
+            alignItems: 'center',
           }}
-          className="workspace-container"
         >
-          {/* Workspace Sidebar */}
+          {/* Left Column */}
+          <div>
+            <div style={{ marginBottom: '20px' }}>
+              <Badge number="7" iconType="burst" label="Workspace" />
+            </div>
+
+            <h2
+              style={{
+                fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.04em',
+                lineHeight: 1.05,
+                color: '#141414',
+                marginBottom: '18px',
+                maxWidth: '460px',
+              }}
+            >
+              Bring every account, card and payout into one calm workspace.
+            </h2>
+
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: 1.6,
+                color: '#525252',
+                maxWidth: '420px',
+              }}
+            >
+              Spaces keep each team’s money, cards and approvals together, so finance stays organized without a single spreadsheet.
+            </p>
+          </div>
+
+          {/* Right Column: Dark App Window */}
           <div
+            className="workspace-window"
             style={{
-              backgroundColor: '#f9f9f9',
-              borderRight: '1px solid #ebebeb',
-              padding: '24px 16px',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
+              backgroundColor: '#141414',
+              borderRadius: '28px',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              boxShadow: '0 24px 60px rgba(0, 0, 0, 0.18)',
+              display: 'grid',
+              gridTemplateColumns: '165px 1fr',
+              overflow: 'hidden',
+              color: '#ffffff',
+              minHeight: '420px',
             }}
-            className="workspace-sidebar"
           >
-            <div>
-              {/* User profile */}
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '24px', paddingBottom: '16px', borderBottom: '1px solid #ebebeb' }}>
+            {/* Left Sidebar */}
+            <div
+              className="workspace-sidebar"
+              style={{
+                padding: '20px 12px',
+                borderRight: '1px solid rgba(255, 255, 255, 0.07)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                gap: '24px',
+              }}
+            >
+              <div>
+                {/* Window Brand */}
                 <div
                   style={{
-                    width: 32,
-                    height: 32,
-                    borderRadius: '50%',
-                    backgroundColor: '#141414',
-                    color: '#ffffff',
                     display: 'flex',
                     alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '12px',
+                    gap: '8px',
+                    padding: '4px 8px 16px',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '20px',
+                      height: '20px',
+                      borderRadius: '999px',
+                      backgroundColor: '#ffffff',
+                      color: '#141414',
+                      display: 'inline-flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '12px',
+                      fontWeight: 800,
+                    }}
+                  >
+                    ✳
+                  </span>
+                  <span style={{ fontSize: '13.5px', fontWeight: 600, letterSpacing: '-0.02em' }}>
+                    Saro
+                  </span>
+                </div>
+
+                {/* Nav List */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
+                  {SIDEBAR_ITEMS.map((item) => {
+                    const active = activeNav === item.label;
+                    return (
+                      <button
+                        key={item.label}
+                        type="button"
+                        onClick={() => setActiveNav(item.label)}
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'space-between',
+                          padding: '7px 10px',
+                          borderRadius: '9px',
+                          border: 'none',
+                          backgroundColor: active ? 'rgba(255, 255, 255, 0.09)' : 'transparent',
+                          color: active ? '#ffffff' : 'rgba(255, 255, 255, 0.55)',
+                          fontSize: '12px',
+                          fontWeight: active ? 500 : 400,
+                          cursor: 'pointer',
+                          textAlign: 'left',
+                        }}
+                      >
+                        <span style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                          <span style={{ color: active ? '#0066ff' : 'inherit', fontSize: '11px' }}>
+                            {item.icon}
+                          </span>
+                          {item.label}
+                        </span>
+                        {item.badge && (
+                          <span
+                            style={{
+                              padding: '1px 6px',
+                              borderRadius: '999px',
+                              backgroundColor: '#ccff00',
+                              color: '#141414',
+                              fontSize: '9.5px',
+                              fontWeight: 700,
+                            }}
+                          >
+                            {item.badge}
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Bottom User Profile */}
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '9px',
+                  padding: '8px 8px 0',
+                  borderTop: '1px solid rgba(255, 255, 255, 0.07)',
+                }}
+              >
+                <span
+                  style={{
+                    width: '26px',
+                    height: '26px',
+                    borderRadius: '999px',
+                    backgroundColor: '#ccff00',
+                    color: '#141414',
+                    fontSize: '10px',
                     fontWeight: 700,
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0,
                   }}
                 >
                   LP
-                </div>
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>Lena Park</div>
-                  <div style={{ fontSize: '11px', color: '#707070' }}>Workspace Admin</div>
-                </div>
-              </div>
-
-              {/* Nav Items */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-                {[
-                  { label: 'Overview', active: false },
-                  { label: 'Payments', active: false },
-                  { label: 'Spaces', active: true },
-                  { label: 'Accounts', active: false },
-                  { label: 'Cards', active: false },
-                  { label: 'Team Members', active: false },
-                  { label: 'Approvals', active: false },
-                ].map((item) => (
-                  <div
-                    key={item.label}
-                    style={{
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      fontSize: '13px',
-                      fontWeight: item.active ? 600 : 500,
-                      color: item.active ? 'var(--color-primary)' : '#404040',
-                      backgroundColor: item.active ? 'var(--color-primary-subtle)' : 'transparent',
-                      cursor: 'pointer',
-                    }}
-                  >
-                    {item.label}
+                </span>
+                <div style={{ lineHeight: 1.2 }}>
+                  <div style={{ fontSize: '11.5px', fontWeight: 600, color: '#ffffff' }}>
+                    Lena Park
                   </div>
-                ))}
+                  <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)' }}>Admin</div>
+                </div>
               </div>
             </div>
 
-            <button
-              type="button"
-              style={{
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                padding: '8px',
-                borderRadius: '8px',
-                border: '1px dashed #d0d0d0',
-                fontSize: '12px',
-                fontWeight: 600,
-                color: '#555555',
-                cursor: 'pointer',
-              }}
-            >
-              <Plus size={14} />
-              <span>New space</span>
-            </button>
-          </div>
-
-          {/* Workspace Main Area */}
-          <div style={{ padding: '32px' }}>
-            {/* Top Workspace Header */}
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap', gap: '12px' }}>
+            {/* Right Main Content */}
+            <div style={{ padding: '22px', display: 'flex', flexDirection: 'column', gap: '20px', overflow: 'hidden' }}>
+              {/* Balances Row */}
               <div>
-                <h3 style={{ fontSize: '20px', fontWeight: 700, color: '#141414' }}>Spaces Overview</h3>
-                <div style={{ fontSize: '13px', color: '#707070' }}>Multi-entity treasury rollup</div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button
-                  type="button"
+                <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 12px',
-                    borderRadius: '8px',
-                    border: '1px solid #e0e0e0',
-                    fontSize: '12px',
-                    fontWeight: 500,
-                    backgroundColor: '#ffffff',
-                    cursor: 'pointer',
+                    alignItems: 'baseline',
+                    justifyContent: 'space-between',
+                    marginBottom: '10px',
                   }}
                 >
-                  <Download size={13} />
-                  <span>Export</span>
-                </button>
-                <button
-                  type="button"
+                  <span style={{ fontSize: '12.5px', fontWeight: 600, color: '#ffffff' }}>
+                    Balances
+                  </span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>
+                    Across 6 currencies
+                  </span>
+                </div>
+
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, minmax(110px, 1fr))',
+                    gap: '10px',
+                  }}
+                >
+                  {[
+                    { symbol: '$', code: 'USD', amount: '$1.24M', bg: '#0066ff' },
+                    { symbol: '€', code: 'EUR', amount: '€382K', bg: '#00d64f' },
+                    { symbol: '£', code: 'GBP', amount: '£96.8K', bg: '#635bff' },
+                  ].map((b) => (
+                    <div
+                      key={b.code}
+                      style={{
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.07)',
+                        borderRadius: '14px',
+                        padding: '12px',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        justifyContent: 'space-between',
+                        gap: '12px',
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: '24px',
+                          height: '24px',
+                          borderRadius: '7px',
+                          backgroundColor: b.bg,
+                          color: '#ffffff',
+                          display: 'inline-flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '11px',
+                          fontWeight: 700,
+                        }}
+                      >
+                        {b.symbol}
+                      </span>
+                      <div>
+                        <div style={{ fontSize: '10px', color: 'rgba(255,255,255,0.45)' }}>
+                          {b.code}
+                        </div>
+                        <div
+                          style={{
+                            fontSize: '16px',
+                            fontWeight: 600,
+                            color: '#ffffff',
+                            letterSpacing: '-0.02em',
+                            fontVariantNumeric: 'tabular-nums',
+                          }}
+                        >
+                          {b.amount}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Team Spaces Row */}
+              <div>
+                <div
                   style={{
                     display: 'flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    padding: '6px 12px',
-                    borderRadius: '8px',
-                    backgroundColor: 'var(--color-primary)',
-                    color: '#ffffff',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    cursor: 'pointer',
+                    alignItems: 'baseline',
+                    justifyContent: 'space-between',
+                    marginBottom: '10px',
                   }}
                 >
-                  <Plus size={13} />
-                  <span>New space</span>
-                </button>
-              </div>
-            </div>
-
-            {/* Currency Balances Pill Grid */}
-            <div style={{ marginBottom: '28px' }}>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', marginBottom: '10px', textTransform: 'uppercase' }}>
-                Balances Across 6 Currencies
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(130px, 100%), 1fr))', gap: '10px' }}>
-                {[
-                  { curr: 'USD', amount: '$1.24M' },
-                  { curr: 'EUR', amount: 'â‚¬382K' },
-                  { curr: 'GBP', amount: 'Â£96.8K' },
-                  { curr: 'JPY', amount: 'Â¥14.2M' },
-                ].map((b) => (
-                  <div
-                    key={b.curr}
-                    style={{
-                      padding: '12px 14px',
-                      borderRadius: '10px',
-                      backgroundColor: '#f7f7f7',
-                      border: '1px solid #ebebeb',
-                    }}
-                  >
-                    <div style={{ fontSize: '11px', color: '#707070', fontWeight: 600 }}>{b.curr}</div>
-                    <div className="mono-num" style={{ fontSize: '16px', fontWeight: 700, color: '#141414' }}>{b.amount}</div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Team Spaces Breakdown */}
-            <div>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', marginBottom: '10px', textTransform: 'uppercase' }}>
-                Grouped by Team
-              </div>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(min(200px, 100%), 1fr))', gap: '16px' }}>
-                <div style={{ padding: '16px', borderRadius: '12px', backgroundColor: '#f9f9f9', border: '1px solid #ebebeb' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414', marginBottom: '4px' }}>Operations</div>
-                  <div className="mono-num" style={{ fontSize: '20px', fontWeight: 700, color: '#141414' }}>$1.2M</div>
-                  <div style={{ fontSize: '12px', color: '#707070', marginTop: '4px' }}>3 subsidiaries connected</div>
+                  <span style={{ fontSize: '12.5px', fontWeight: 600, color: '#ffffff' }}>
+                    Team spaces
+                  </span>
+                  <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.45)' }}>
+                    Grouped by team
+                  </span>
                 </div>
 
-                <div style={{ padding: '16px', borderRadius: '12px', backgroundColor: '#f9f9f9', border: '1px solid #ebebeb' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414', marginBottom: '4px' }}>Treasury</div>
-                  <div className="mono-num" style={{ fontSize: '20px', fontWeight: 700, color: '#12a150' }}>$4.8M</div>
-                  <div style={{ fontSize: '12px', color: '#707070', marginTop: '4px' }}>Yielding 4.2% APY</div>
-                </div>
-
-                <div style={{ padding: '16px', borderRadius: '12px', backgroundColor: '#f9f9f9', border: '1px solid #ebebeb' }}>
-                  <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414', marginBottom: '4px' }}>Cards</div>
-                  <div className="mono-num" style={{ fontSize: '20px', fontWeight: 700, color: 'var(--color-primary)' }}>312 active</div>
-                  <div style={{ fontSize: '12px', color: '#707070', marginTop: '4px' }}>Realtime limit rules</div>
+                <div
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(3, minmax(110px, 1fr))',
+                    gap: '10px',
+                  }}
+                >
+                  {SPACES.map((space) => (
+                    <div
+                      key={space.name}
+                      style={{
+                        position: 'relative',
+                        height: '175px',
+                        borderRadius: '14px',
+                        overflow: 'hidden',
+                        border: '1px solid rgba(255, 255, 255, 0.08)',
+                      }}
+                    >
+                      <img
+                        src={space.image}
+                        alt={space.name}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                      <div
+                        style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,0.82) 100%)',
+                          display: 'flex',
+                          alignItems: 'flex-end',
+                          justifyContent: 'space-between',
+                          padding: '10px 12px',
+                        }}
+                      >
+                        <span style={{ fontSize: '11.5px', fontWeight: 600, color: '#ffffff' }}>
+                          {space.name}
+                        </span>
+                        <span style={{ fontSize: '11px', color: 'rgba(255,255,255,0.8)', fontWeight: 500 }}>
+                          {space.stat}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -235,8 +381,8 @@ export const WorkspaceSection: React.FC = () => {
       </div>
 
       <style>{`
-        @media (max-width: 800px) {
-          .workspace-container {
+        @media (max-width: 640px) {
+          .workspace-window {
             grid-template-columns: 1fr !important;
           }
           .workspace-sidebar {

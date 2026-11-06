@@ -1,160 +1,241 @@
-﻿import React from 'react';
-import { Badge } from '../ui/Badge';
-import { Button } from '../ui/Button';
-import { blogPostsData } from '../../data/blog';
-import { ArrowRight, Clock } from 'lucide-react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import { Badge } from '../ui/Badge';
+import { blogPostsData } from '../../data/blog';
+
+const THEME_OVERLAYS = {
+  blue: {
+    bg: '#0055ff',
+    textColor: '#ffffff',
+    blend: 'multiply' as const,
+  },
+  violet: {
+    bg: '#5546ff',
+    textColor: '#ffffff',
+    blend: 'multiply' as const,
+  },
+  lime: {
+    bg: '#c8ff00',
+    textColor: '#141414',
+    blend: 'multiply' as const,
+  },
+};
 
 export const BlogSection: React.FC = () => {
+  const posts = blogPostsData.slice(0, 3);
+
   return (
     <section
       id="blog"
-      data-framer-name="Latest Posts"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
-        backgroundColor: '#fafafa',
-        borderTop: '1px solid var(--color-border)',
-        borderBottom: '1px solid var(--color-border)',
+        padding: '96px 0',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
-        {/* Section Header */}
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'flex-end',
-            marginBottom: '48px',
-            flexWrap: 'wrap',
-            gap: '24px',
-          }}
-        >
-          <div>
-            <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-              <Badge number="9" label="Blog" />
-            </div>
-            <h2 className="section-title" style={{ marginBottom: '12px' }}>
-              Fresh from the blog.
-            </h2>
-            <p className="section-description">
-              Playbooks, product news and stories from the finance teams that run on Saro.
-            </p>
-          </div>
-
-          <Button to="/blog" variant="secondary" size="md" iconRight={<ArrowRight size={16} />}>
-            View all posts
-          </Button>
-        </div>
-
-        {/* 3 Featured Article Cards */}
+        {/* Split Header */}
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(320px, 100%), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+            gap: '28px',
+            alignItems: 'end',
+            marginBottom: '44px',
+          }}
+        >
+          <div>
+            <div style={{ marginBottom: '18px' }}>
+              <Badge number="9" iconType="book" label="Blog" />
+            </div>
+            <h2
+              style={{
+                fontSize: 'clamp(2.25rem, 4.2vw, 3.35rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.04em',
+                lineHeight: 1.05,
+                color: '#141414',
+              }}
+            >
+              Fresh from the blog.
+            </h2>
+          </div>
+
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: 1.55,
+                color: '#525252',
+                maxWidth: '370px',
+              }}
+            >
+              Playbooks, product news and stories from the finance teams that run on Saro.
+            </p>
+          </div>
+        </div>
+
+        {/* 3 Blog Cards */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
             gap: '24px',
           }}
         >
-          {blogPostsData.slice(0, 3).map((post) => (
-            <Link
-              key={post.slug}
-              to={`/blog/${post.slug}`}
-              style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '20px',
-                border: '1px solid var(--color-border)',
-                overflow: 'hidden',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                boxShadow: 'var(--shadow-card)',
-                transition: 'transform var(--transition-fast), border-color var(--transition-fast)',
-                textDecoration: 'none',
-              }}
-              className="blog-card"
-            >
-              {/* Graphic Card Cover */}
-              <div
+          {posts.map((post) => {
+            const theme = THEME_OVERLAYS[post.coverTheme];
+            return (
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
                 style={{
-                  height: '180px',
-                  backgroundColor: '#f0f0f0',
-                  padding: '24px',
                   display: 'flex',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  background: 'linear-gradient(135deg, #f7f7f7 0%, #ebebeb 100%)',
-                  borderBottom: '1px solid #ebebeb',
+                  textDecoration: 'none',
+                  color: 'inherit',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                  <span
+                {/* Duotone Photo Cover */}
+                <div
+                  style={{
+                    position: 'relative',
+                    height: '225px',
+                    borderRadius: '22px',
+                    overflow: 'hidden',
+                    backgroundColor: theme.bg,
+                    marginBottom: '18px',
+                  }}
+                >
+                  <img
+                    src={post.coverImage}
+                    alt={post.title}
                     style={{
-                      fontSize: '11px',
-                      fontWeight: 700,
-                      color: 'var(--color-primary)',
-                      backgroundColor: '#ffffff',
-                      padding: '3px 8px',
-                      borderRadius: 'var(--radius-full)',
-                      border: '1px solid #e0e0e0',
-                      textTransform: 'uppercase',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      filter: 'grayscale(100%) contrast(1.15)',
+                      mixBlendMode: theme.blend,
+                      opacity: 0.9,
+                      display: 'block',
+                      transition: 'transform 0.45s cubic-bezier(0.22, 1, 0.36, 1)',
+                    }}
+                    className="blog-cover-img"
+                  />
+
+                  {/* Top Overlay Labels */}
+                  <div
+                    style={{
+                      position: 'absolute',
+                      top: '16px',
+                      left: '18px',
+                      right: '18px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'space-between',
+                      color: theme.textColor,
+                      zIndex: 2,
                     }}
                   >
-                    {post.category}
-                  </span>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '4px', fontSize: '12px', color: '#707070' }}>
-                    <Clock size={13} />
-                    <span>{post.readTime}</span>
+                    <span
+                      style={{
+                        fontSize: '10px',
+                        fontFamily: 'var(--font-mono)',
+                        fontWeight: 600,
+                        letterSpacing: '0.08em',
+                        textTransform: 'uppercase',
+                      }}
+                    >
+                      {post.category}
+                    </span>
+                    <span
+                      style={{
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        letterSpacing: '-0.03em',
+                        opacity: 0.85,
+                      }}
+                    >
+                      saro
+                    </span>
                   </div>
                 </div>
 
-                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                  <span style={{ fontSize: '18px', fontWeight: 700, letterSpacing: '-0.04em', color: '#141414' }}>saro</span>
-                  <span style={{ fontSize: '11px', color: '#707070' }}>Â· {post.date}</span>
-                </div>
-              </div>
-
-              {/* Content Body */}
-              <div style={{ padding: '24px', display: 'flex', flexDirection: 'column', flex: 1, justifyContent: 'space-between' }}>
-                <div>
-                  <h3
-                    style={{
-                      fontSize: '18px',
-                      fontWeight: 600,
-                      color: '#141414',
-                      lineHeight: 1.35,
-                      marginBottom: '10px',
-                    }}
-                  >
-                    {post.title}
-                  </h3>
-                  <p style={{ fontSize: '14px', color: '#707070', lineHeight: 1.5, marginBottom: '20px' }}>
-                    {post.excerpt}
-                  </p>
-                </div>
-
+                {/* Meta Row */}
                 <div
                   style={{
                     display: 'flex',
                     alignItems: 'center',
-                    gap: '6px',
+                    gap: '10px',
+                    marginBottom: '10px',
+                  }}
+                >
+                  <span
+                    style={{
+                      padding: '4px 10px',
+                      borderRadius: '999px',
+                      backgroundColor: '#f5f5f5',
+                      fontSize: '11.5px',
+                      fontWeight: 500,
+                      color: '#141414',
+                    }}
+                  >
+                    {post.category}
+                  </span>
+                  <span style={{ fontSize: '12px', color: '#8a8a8a' }}>{post.date}</span>
+                </div>
+
+                {/* Title */}
+                <h3
+                  style={{
+                    fontSize: '19px',
+                    fontWeight: 500,
+                    letterSpacing: '-0.025em',
+                    lineHeight: 1.3,
+                    color: '#141414',
+                    marginBottom: '8px',
+                  }}
+                >
+                  {post.title}
+                </h3>
+
+                {/* Excerpt */}
+                <p
+                  style={{
+                    fontSize: '13.5px',
+                    lineHeight: 1.55,
+                    color: '#6b6b6b',
+                    marginBottom: '18px',
+                    flexGrow: 1,
+                  }}
+                >
+                  {post.excerpt}
+                </p>
+
+                {/* Read article footer */}
+                <div
+                  style={{
+                    paddingTop: '14px',
+                    borderTop: '1px solid #efefef',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'space-between',
                     fontSize: '13px',
-                    fontWeight: 600,
-                    color: 'var(--color-primary)',
+                    fontWeight: 500,
+                    color: '#141414',
                   }}
                 >
                   <span>Read article</span>
-                  <ArrowRight size={14} />
+                  <span style={{ color: '#6b6b6b' }}>↗</span>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            );
+          })}
         </div>
       </div>
 
       <style>{`
-        .blog-card:hover {
-          border-color: #0066ff !important;
-          transform: translateY(-2px);
+        a:hover .blog-cover-img {
+          transform: scale(1.04);
         }
       `}</style>
     </section>

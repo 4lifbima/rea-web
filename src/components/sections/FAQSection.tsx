@@ -1,77 +1,164 @@
 import React from 'react';
 import { Badge } from '../ui/Badge';
+import { Button } from '../ui/Button';
 import { Accordion } from '../ui/Accordion';
 import { faqData } from '../../data/faq';
-import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
+
+const SUPPORT_AVATARS = [
+  '/assets/images/JhVhX5NpWx66mAyFjKStvFaZbAo.jpg',
+  '/assets/images/2Cu3OpYSPTUbz6Wo3O4EaekV8.jpg',
+  '/assets/images/VNwCUIPSCB4yi1usyzTj13lw4EE.jpg',
+];
 
 export const FAQSection: React.FC = () => {
   return (
     <section
       id="faq"
-      data-framer-name="FAQ"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
+        padding: '96px 0',
+        backgroundColor: '#ffffff',
       }}
     >
-      <div className="container" style={{ maxWidth: '960px' }}>
-        {/* Section Header */}
-        <div style={{ textAlign: 'center', marginBottom: '48px' }}>
-          <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-            <Badge number="10" label="FAQ" />
-          </div>
-          <h2 className="section-title" style={{ marginBottom: '16px' }}>
-            Questions, answered.
-          </h2>
-          <p className="section-description" style={{ margin: '0 auto 24px auto' }}>
-            Everything you need to know about Saro, from setup to security. Still curious? Our team is one message away.
-          </p>
+      <div className="container">
+        <div
+          className="faq-grid"
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '380px 1fr',
+            gap: '56px',
+            alignItems: 'start',
+          }}
+        >
+          {/* Left Column */}
+          <div>
+            <div style={{ marginBottom: '18px' }}>
+              <Badge number="10" iconType="grid-orange" label="FAQ" />
+            </div>
 
-          {/* Quick Help Pill */}
-          <div
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '10px',
-              padding: '8px 18px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: '#ffffff',
-              border: '1px solid var(--color-border)',
-              boxShadow: 'var(--shadow-subtle)',
-              fontSize: '13px',
-              color: 'var(--color-text)',
-            }}
-          >
-            <span
+            <h2
               style={{
-                width: 7,
-                height: 7,
-                borderRadius: '50%',
-                backgroundColor: '#12a150',
-              }}
-              className="animate-pulse-dot"
-            />
-            <span style={{ fontWeight: 500 }}>Still have questions?</span>
-            <Link
-              to="/#contact"
-              style={{
-                color: 'var(--color-primary)',
-                fontWeight: 600,
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '4px',
+                fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+                fontWeight: 500,
+                letterSpacing: '-0.04em',
+                lineHeight: 1.05,
+                color: '#141414',
+                marginBottom: '14px',
               }}
             >
-              <span>Talk to us</span>
-              <ArrowRight size={13} />
-            </Link>
+              Questions, answered.
+            </h2>
+
+            <p
+              style={{
+                fontSize: '15px',
+                lineHeight: 1.6,
+                color: '#525252',
+                marginBottom: '32px',
+              }}
+            >
+              Everything you need to know about getting started, security and billing.
+            </p>
+
+            {/* Gray Support Card */}
+            <div
+              style={{
+                backgroundColor: '#f7f7f7',
+                borderRadius: '24px',
+                padding: '24px',
+              }}
+            >
+              <div
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '12px',
+                  marginBottom: '16px',
+                }}
+              >
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                  {SUPPORT_AVATARS.map((src, i) => (
+                    <img
+                      key={src}
+                      src={src}
+                      alt=""
+                      style={{
+                        width: '32px',
+                        height: '32px',
+                        borderRadius: '999px',
+                        objectFit: 'cover',
+                        border: '2px solid #f7f7f7',
+                        marginLeft: i === 0 ? 0 : '-8px',
+                      }}
+                    />
+                  ))}
+                </div>
+
+                <span
+                  style={{
+                    display: 'inline-flex',
+                    alignItems: 'center',
+                    gap: '6px',
+                    fontSize: '12px',
+                    color: '#525252',
+                    fontWeight: 500,
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '7px',
+                      height: '7px',
+                      borderRadius: '999px',
+                      backgroundColor: '#00d64f',
+                    }}
+                  />
+                  Online now
+                </span>
+              </div>
+
+              <h3
+                style={{
+                  fontSize: '17px',
+                  fontWeight: 600,
+                  letterSpacing: '-0.02em',
+                  color: '#141414',
+                  marginBottom: '6px',
+                }}
+              >
+                Still have questions?
+              </h3>
+
+              <p
+                style={{
+                  fontSize: '13.5px',
+                  lineHeight: 1.5,
+                  color: '#6b6b6b',
+                  marginBottom: '18px',
+                }}
+              >
+                Talk to a real person. We reply in under two hours.
+              </p>
+
+              <Button variant="primary" size="sm" href="#contact" showChevron>
+                Talk to us
+              </Button>
+            </div>
+          </div>
+
+          {/* Right Column: 8 Accordion Items */}
+          <div>
+            <Accordion items={faqData} defaultOpenIndex={-1} />
           </div>
         </div>
-
-        {/* 8 Accordion Questions */}
-        <Accordion items={faqData} defaultOpenIndex={0} allowMultiple={false} />
       </div>
+
+      <style>{`
+        @media (max-width: 900px) {
+          .faq-grid {
+            grid-template-columns: 1fr !important;
+            gap: 36px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };

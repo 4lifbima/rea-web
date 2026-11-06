@@ -1,196 +1,286 @@
-﻿import React, { useState } from 'react';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
-import { Sparkles } from 'lucide-react';
+
+const PARTNER_LOGOS = [
+  '/assets/svgs/FuiFarr3QTYXqyqMVAc3sG5MNJA.svg',
+  '/assets/svgs/T1nWoszgnZpayyptljgqyxsq7s.svg',
+  '/assets/svgs/OhDeN9SIXDzgHpOWOe9Rha68dw.svg',
+  '/assets/svgs/fiEkizV5UawQFZyvE8FXddATTw.svg',
+  '/assets/svgs/hC8qlT5Jb6E8g8ruSpawznE7E.svg',
+];
+
+const VENDORS = [
+  {
+    name: 'Hexa',
+    category: 'Project tools',
+    growth: '+142%',
+    amount: '$48,200',
+    bars: [32, 38, 45, 52, 64, 100],
+  },
+  {
+    name: 'Sparkhost',
+    category: 'Cloud hosting',
+    growth: '+88%',
+    amount: '$31,740',
+    bars: [42, 46, 54, 62, 72, 100],
+  },
+  {
+    name: 'Stackpad',
+    category: 'Workspace',
+    growth: '+61%',
+    amount: '$12,960',
+    bars: [48, 52, 58, 66, 76, 95],
+  },
+];
 
 export const SaroAISection: React.FC = () => {
-  const [activeQuery, setActiveQuery] = useState(
-    'Which vendors grew fastest this quarter, and why?'
-  );
-
-  const sampleQueries = [
-    'Which vendors grew fastest this quarter, and why?',
-    'What is our runway if we hire 4 engineers in Q4?',
-    'Show all card transactions over $1,000 without receipts',
-  ];
-
   return (
     <section
-      id="ai"
-      data-framer-name="Split AI"
+      id="saro-ai"
       style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
+        padding: '96px 0',
+        backgroundColor: '#ffffff',
       }}
     >
       <div className="container">
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(min(360px, 100%), 1fr))',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(340px, 1fr))',
             gap: '56px',
             alignItems: 'center',
           }}
         >
-          {/* Left Column: Text & Pitch */}
-          <div>
-            <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
-              <Badge number="3" label="Saro AI" />
-            </div>
-            <h2 className="section-title" style={{ marginBottom: '20px' }}>
-              Give your finance team an AI copilot.
-            </h2>
-            <p className="section-description" style={{ marginBottom: '32px' }}>
-              Ask questions in plain English and get answers from every transaction, invoice and card in seconds. No exports, no formulas, no waiting on reports.
-            </p>
-
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px', flexWrap: 'wrap', marginBottom: '20px' }}>
-              <Button to="/pricing" variant="primary" size="lg" icon={<Sparkles size={16} />}>
-                Try Saro AI
-              </Button>
-              <span style={{ fontSize: '13px', color: '#707070' }}>
-                Included on Growth and Scale plans
-              </span>
-            </div>
-
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', paddingTop: '16px' }}>
-              <div style={{ fontSize: '12px', fontWeight: 600, color: '#adadad', textTransform: 'uppercase' }}>
-                Suggested inquiries
+          {/* Left Column */}
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'space-between',
+              minHeight: '420px',
+            }}
+          >
+            <div>
+              <div style={{ marginBottom: '20px' }}>
+                <Badge number="3" iconType="butterfly" label="Saro AI" />
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                {sampleQueries.map((q, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveQuery(q)}
-                    style={{
-                      textAlign: 'left',
-                      padding: '8px 12px',
-                      borderRadius: '8px',
-                      backgroundColor: activeQuery === q ? 'var(--color-primary-subtle)' : '#f0f0f0',
-                      color: activeQuery === q ? 'var(--color-primary)' : '#404040',
-                      fontSize: '13px',
-                      fontWeight: 500,
-                      cursor: 'pointer',
-                      border: activeQuery === q ? '1px solid var(--color-primary-light)' : '1px solid transparent',
-                      transition: 'all 0.2s',
-                    }}
-                  >
-                    &ldquo;{q}&rdquo;
-                  </button>
-                ))}
+
+              <h2
+                style={{
+                  fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+                  fontWeight: 500,
+                  letterSpacing: '-0.04em',
+                  lineHeight: 1.05,
+                  color: '#141414',
+                  marginBottom: '18px',
+                  maxWidth: '440px',
+                }}
+              >
+                Give your finance team an AI copilot.
+              </h2>
+
+              <p
+                style={{
+                  fontSize: '15px',
+                  lineHeight: 1.6,
+                  color: '#525252',
+                  maxWidth: '420px',
+                  marginBottom: '28px',
+                }}
+              >
+                Ask about spend, cash flow or late invoices in plain English. Saro AI reads your live ledger and answers with the chart already built.
+              </p>
+
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '10px' }}>
+                <Button variant="secondary" href="/contact" showChevron>
+                  Try Saro AI
+                </Button>
+                <span style={{ fontSize: '12px', color: '#8a8a8a' }}>
+                  Included on Growth and Scale plans
+                </span>
               </div>
+            </div>
+
+            {/* Bottom Partner Logos */}
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '28px',
+                flexWrap: 'wrap',
+                marginTop: '48px',
+                opacity: 0.45,
+              }}
+            >
+              {PARTNER_LOGOS.map((src, i) => (
+                <img
+                  key={i}
+                  src={src}
+                  alt=""
+                  style={{
+                    height: '20px',
+                    width: 'auto',
+                    objectFit: 'contain',
+                  }}
+                />
+              ))}
             </div>
           </div>
 
-          {/* Right Column: AI Chat Preview */}
+          {/* Right Column: Gray AI Panel */}
           <div
             style={{
-              backgroundColor: '#ffffff',
-              borderRadius: '24px',
-              border: '1px solid var(--color-border)',
-              padding: '28px',
-              boxShadow: 'var(--shadow-card)',
+              backgroundColor: '#f7f7f7',
+              borderRadius: '28px',
+              padding: '36px 28px',
+              overflow: 'hidden',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '20px',
             }}
           >
-            {/* Top Prompt Box */}
-            <div
-              style={{
-                backgroundColor: '#f7f7f7',
-                borderRadius: '16px',
-                padding: '16px',
-                border: '1px solid #ebebeb',
-                marginBottom: '20px',
-              }}
-            >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-                <span
-                  style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%',
-                    backgroundColor: '#141414',
-                    color: '#ffffff',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: '11px',
-                    fontWeight: 700,
-                  }}
-                >
-                  U
-                </span>
-                <span style={{ fontSize: '13px', fontWeight: 600, color: '#141414' }}>Maya Chen (Controller)</span>
-              </div>
-              <div style={{ fontSize: '15px', color: '#141414', fontWeight: 500 }}>
-                {activeQuery}
+            {/* User Prompt Bubble */}
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <div
+                style={{
+                  backgroundColor: '#ffffff',
+                  borderRadius: '999px',
+                  padding: '12px 20px',
+                  fontSize: '13.5px',
+                  fontWeight: 500,
+                  color: '#141414',
+                  boxShadow: '0 2px 8px rgba(0,0,0,0.03)',
+                  border: '1px solid rgba(0,0,0,0.04)',
+                }}
+              >
+                Which vendors grew fastest this quarter, and why?
               </div>
             </div>
 
-            {/* Saro AI Answer */}
+            {/* Found 3 vendors indicator */}
             <div
               style={{
-                borderRadius: '16px',
-                padding: '20px',
-                border: '1px solid #e0edff',
-                backgroundColor: '#fafcff',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '6px',
+                fontSize: '12px',
+                fontWeight: 500,
+                color: '#6b6b6b',
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <div
+              <span style={{ color: '#0066ff', fontSize: '13px' }}>✦</span>
+              Found 3 vendors
+            </div>
+
+            {/* 3 Vendor Cards */}
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(3, minmax(175px, 1fr))',
+                gap: '14px',
+                overflowX: 'auto',
+                paddingBottom: '4px',
+              }}
+              className="no-scrollbar"
+            >
+              {VENDORS.map((vendor, idx) => (
+                <motion.div
+                  key={vendor.name}
+                  initial={{ opacity: 0, y: 14 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.4, delay: idx * 0.08 }}
                   style={{
-                    width: 24,
-                    height: 24,
-                    borderRadius: '50%',
-                    backgroundColor: 'var(--color-primary)',
-                    color: '#ffffff',
+                    backgroundColor: '#ffffff',
+                    borderRadius: '20px',
+                    padding: '18px',
+                    border: '1px solid rgba(0,0,0,0.04)',
                     display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    flexDirection: 'column',
+                    justifyContent: 'space-between',
+                    gap: '18px',
                   }}
                 >
-                  <Sparkles size={13} />
-                </div>
-                <span style={{ fontSize: '13px', fontWeight: 700, color: '#141414' }}>Saro Copilot</span>
-                <span style={{ fontSize: '11px', color: '#12a150', backgroundColor: '#e7f6ee', padding: '1px 6px', borderRadius: '4px' }}>
-                  Live Ledger Verified
-                </span>
-              </div>
-
-              <div style={{ fontSize: '14px', color: '#404040', marginBottom: '16px', lineHeight: 1.5 }}>
-                Found 3 vendors that grew more than 50% quarter-over-quarter:
-              </div>
-
-              {/* Breakdown Cards */}
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-                {[
-                  { name: 'Hexa', role: 'Project management & seat expansion', growth: '+142%', total: '$48,200 this quarter' },
-                  { name: 'Sparkhost', role: 'Auto-scaling production GPU cluster', growth: '+88%', total: '$31,740 this quarter' },
-                  { name: 'Stackpad', role: 'New enterprise security add-on', growth: '+61%', total: '$12,960 this quarter' },
-                ].map((v, i) => (
+                  {/* Top Row */}
                   <div
-                    key={i}
                     style={{
                       display: 'flex',
-                      alignItems: 'center',
+                      alignItems: 'flex-start',
                       justifyContent: 'space-between',
-                      padding: '12px 14px',
-                      backgroundColor: '#ffffff',
-                      borderRadius: '10px',
-                      border: '1px solid #eef2f6',
+                      gap: '8px',
                     }}
                   >
                     <div>
-                      <div style={{ fontSize: '14px', fontWeight: 600, color: '#141414' }}>{v.name}</div>
-                      <div style={{ fontSize: '12px', color: '#707070' }}>{v.role}</div>
+                      <div
+                        style={{
+                          fontSize: '15px',
+                          fontWeight: 600,
+                          color: '#141414',
+                          letterSpacing: '-0.02em',
+                        }}
+                      >
+                        {vendor.name}
+                      </div>
+                      <div style={{ fontSize: '11px', color: '#8a8a8a' }}>
+                        {vendor.category}
+                      </div>
                     </div>
-                    <div style={{ textAlign: 'right' }}>
-                      <div className="mono-num" style={{ fontSize: '14px', fontWeight: 700, color: '#12a150' }}>{v.growth}</div>
-                      <div style={{ fontSize: '11px', color: '#707070' }}>{v.total}</div>
-                    </div>
+                    <span
+                      style={{
+                        padding: '3px 8px',
+                        borderRadius: '999px',
+                        backgroundColor: '#e8f1ff',
+                        color: '#0066ff',
+                        fontSize: '11px',
+                        fontWeight: 600,
+                      }}
+                    >
+                      {vendor.growth}
+                    </span>
                   </div>
-                ))}
-              </div>
+
+                  {/* 6-Bar Chart */}
+                  <div
+                    style={{
+                      display: 'grid',
+                      gridTemplateColumns: 'repeat(6, 1fr)',
+                      gap: '6px',
+                      height: '64px',
+                      alignItems: 'end',
+                    }}
+                  >
+                    {vendor.bars.map((barH, bIdx) => (
+                      <div
+                        key={bIdx}
+                        style={{
+                          height: `${barH}%`,
+                          borderRadius: '4px',
+                          backgroundColor: bIdx === 5 ? '#0066ff' : '#b3d1ff',
+                        }}
+                      />
+                    ))}
+                  </div>
+
+                  {/* Bottom Amount */}
+                  <div style={{ display: 'flex', alignItems: 'baseline', gap: '6px' }}>
+                    <span
+                      style={{
+                        fontSize: '15px',
+                        fontWeight: 600,
+                        color: '#141414',
+                        fontVariantNumeric: 'tabular-nums',
+                      }}
+                    >
+                      {vendor.amount}
+                    </span>
+                    <span style={{ fontSize: '11px', color: '#8a8a8a' }}>
+                      this quarter
+                    </span>
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>

@@ -1,358 +1,256 @@
-﻿import React, { useState } from 'react';
-import { ArrowUpRight, ArrowRight } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ChevronRight } from 'lucide-react';
 import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
+
+interface HangingIcon {
+  id: string;
+  left: string;
+  lineHeight: number;
+  bg: string;
+  svg: string;
+  delay: number;
+  invertIcon?: boolean;
+}
+
+const hangingIcons: HangingIcon[] = [
+  {
+    id: 'orange-chevron',
+    left: '13.5%',
+    lineHeight: 352,
+    bg: '#ff6b1a',
+    svg: '/assets/svgs/T1nWoszgnZpayyptljgqyxsq7s.svg',
+    delay: 0.05,
+  },
+  {
+    id: 'black-trefoil',
+    left: '21.8%',
+    lineHeight: 204,
+    bg: '#141414',
+    svg: '/assets/svgs/FuiFarr3QTYXqyqMVAc3sG5MNJA.svg',
+    delay: 0.12,
+  },
+  {
+    id: 'green-sparkle',
+    left: '20.2%',
+    lineHeight: 510,
+    bg: '#00d64f',
+    svg: '/assets/svgs/fiEkizV5UawQFZyvE8FXddATTw.svg',
+    delay: 0.2,
+  },
+  {
+    id: 'violet-pie',
+    left: '50%',
+    lineHeight: 128,
+    bg: '#635bff',
+    svg: '/assets/svgs/OhDeN9SIXDzgHpOWOe9Rha68dw.svg',
+    delay: 0.08,
+  },
+  {
+    id: 'green-arrow',
+    left: '78.2%',
+    lineHeight: 208,
+    bg: '#00d64f',
+    svg: '/assets/svgs/8cgSQoUv6rytsOmYz84HMF6z1I.svg',
+    delay: 0.16,
+  },
+  {
+    id: 'lime-leaf',
+    left: '79.2%',
+    lineHeight: 508,
+    bg: '#ccff00',
+    svg: '/assets/svgs/eFftZjC9bKjBLgkyt2id4qkAz9E.svg',
+    delay: 0.24,
+    invertIcon: true,
+  },
+  {
+    id: 'blue-circles',
+    left: '86.5%',
+    lineHeight: 346,
+    bg: '#0066ff',
+    svg: '/assets/svgs/HnNvR3Gd5VRLbPfez4nCLr07HRI.svg',
+    delay: 0.1,
+  },
+];
 
 export const HeroSection: React.FC = () => {
-  const [activeCurrency, setActiveCurrency] = useState<'USD' | 'EUR' | 'GBP'>('USD');
-
-  const balances = {
-    USD: { formatted: '$2,481,920.00', delta: '+4.2% ($102,400)', change: '+4.2%' },
-    EUR: { formatted: 'â‚¬2,284,350.00', delta: '+3.8% (â‚¬84,100)', change: '+3.8%' },
-    GBP: { formatted: 'Â£1,962,800.00', delta: '+4.5% (Â£85,200)', change: '+4.5%' },
-  };
-
   return (
     <section
       id="hero"
       data-framer-name="Hero"
       style={{
-        paddingTop: '64px',
-        paddingBottom: '80px',
-        overflow: 'hidden',
         position: 'relative',
+        paddingTop: '248px',
+        paddingBottom: '56px',
+        overflow: 'hidden',
+        backgroundColor: '#ffffff',
       }}
     >
-      <div className="container" style={{ textAlign: 'center' }}>
-        {/* Announcement Pill Badge */}
-        <div style={{ display: 'inline-flex', justifyContent: 'center', marginBottom: '24px' }}>
-          <div
+      {/* Hanging Pendulum Squircles on Vertical Strings */}
+      <div
+        className="hero-hanging-layer"
+        style={{
+          position: 'absolute',
+          inset: 0,
+          pointerEvents: 'none',
+          maxWidth: '1440px',
+          margin: '0 auto',
+        }}
+      >
+        {hangingIcons.map((item) => (
+          <motion.div
+            key={item.id}
+            initial={{ y: -90, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{
+              type: 'spring',
+              stiffness: 110,
+              damping: 14,
+              delay: item.delay,
+            }}
             style={{
-              display: 'inline-flex',
+              position: 'absolute',
+              top: 0,
+              left: item.left,
+              transform: 'translateX(-50%)',
+              display: 'flex',
+              flexDirection: 'column',
               alignItems: 'center',
-              gap: '8px',
-              padding: '6px 14px',
-              borderRadius: 'var(--radius-full)',
-              backgroundColor: '#ffffff',
-              border: '1px solid var(--color-border)',
-              boxShadow: 'var(--shadow-subtle)',
-              fontSize: '13px',
-              fontWeight: 500,
-              color: 'var(--color-text)',
+              pointerEvents: 'auto',
             }}
           >
-            <span
+            {/* Vertical Suspension String */}
+            <div
               style={{
-                padding: '2px 8px',
-                borderRadius: 'var(--radius-full)',
-                backgroundColor: 'var(--color-primary-subtle)',
-                color: 'var(--color-primary)',
-                fontSize: '11px',
-                fontWeight: 600,
+                width: '1px',
+                height: `${item.lineHeight}px`,
+                background: 'linear-gradient(180deg, rgba(200,200,200,0.35) 0%, #d4d4d4 100%)',
+              }}
+            />
+
+            {/* 3D Glossy Squircle Badge */}
+            <motion.div
+              whileHover={{ scale: 1.1, rotate: -6, y: -4 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 15 }}
+              className="saro-squircle"
+              style={{
+                width: '58px',
+                height: '58px',
+                borderRadius: '16px',
+                backgroundColor: item.bg,
+                cursor: 'grab',
               }}
             >
-              New
-            </span>
-            <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <span
+              <img
+                src={item.svg}
+                alt=""
+                width={26}
+                height={26}
                 style={{
-                  width: '6px',
-                  height: '6px',
-                  borderRadius: '50%',
-                  backgroundColor: '#12a150',
+                  width: '26px',
+                  height: '26px',
+                  filter: item.invertIcon ? 'none' : 'brightness(0) invert(1)',
+                  pointerEvents: 'none',
                 }}
-                className="animate-pulse-dot"
               />
-              Realtime cash flow is live
-            </span>
-          </div>
-        </div>
+            </motion.div>
+          </motion.div>
+        ))}
+      </div>
 
-        {/* Hero Main Heading */}
-        <h1
+      {/* Center Hero Content */}
+      <div
+        className="container"
+        style={{
+          position: 'relative',
+          zIndex: 2,
+          textAlign: 'center',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <motion.div
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.45 }}
+          style={{ marginBottom: '22px' }}
+        >
+          <Badge isNew iconType="burst" label="Realtime cash flow is live" />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.08 }}
           style={{
-            fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-            fontWeight: 700,
-            letterSpacing: '-0.04em',
-            lineHeight: 1.08,
-            color: 'var(--color-text)',
-            maxWidth: '900px',
-            margin: '0 auto 20px auto',
+            fontSize: 'clamp(2.85rem, 6vw, 5.15rem)',
+            fontWeight: 500,
+            letterSpacing: '-0.045em',
+            lineHeight: 1.03,
+            color: '#141414',
+            maxWidth: '760px',
+            marginBottom: '22px',
           }}
         >
-          Run Your Money From One Panel
-        </h1>
+          Run Your Money
+          <br />
+          From <span style={{ color: '#0066ff' }}>One Panel</span>
+        </motion.h1>
 
-        {/* Hero Subheadline */}
-        <p
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.14 }}
           style={{
-            fontSize: 'clamp(1.1rem, 2vw, 1.25rem)',
-            color: 'var(--color-text-muted)',
-            lineHeight: 1.6,
-            maxWidth: '640px',
-            margin: '0 auto 36px auto',
+            fontSize: 'clamp(1rem, 1.35vw, 1.125rem)',
+            color: '#707070',
+            lineHeight: 1.55,
+            letterSpacing: '-0.01em',
+            maxWidth: '470px',
+            marginBottom: '32px',
           }}
         >
           The finance dashboard for modern teams. Payments, cards and payouts in one live panel, synced every second.
-        </p>
+        </motion.p>
 
-        {/* CTA Actions */}
-        <div
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
           style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            gap: '12px',
+            gap: '10px',
             flexWrap: 'wrap',
-            marginBottom: '60px',
           }}
         >
-          <Button to="/pricing" variant="primary" size="lg" iconRight={<ArrowRight size={16} />}>
+          <Button to="/pricing" variant="primary" size="lg">
             Start for free
           </Button>
-          <Button to="/contact" variant="secondary" size="lg">
+          <Button
+            to="/contact"
+            variant="secondary"
+            size="lg"
+            iconRight={<ChevronRight size={15} strokeWidth={2.2} />}
+          >
             Book a demo
           </Button>
-        </div>
-
-        {/* Hero Visual Composition: Calm Finance Dashboard Panel */}
-        <div
-          style={{
-            maxWidth: '1060px',
-            margin: '0 auto',
-            borderRadius: '24px',
-            backgroundColor: '#ffffff',
-            border: '1px solid var(--color-border)',
-            boxShadow: 'var(--shadow-elevated)',
-            overflow: 'hidden',
-            textAlign: 'left',
-          }}
-          className="animate-fade-in"
-        >
-          {/* Top Panel Bar */}
-          <div
-            style={{
-              padding: '16px 24px',
-              borderBottom: '1px solid var(--color-border)',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              backgroundColor: '#fafafa',
-              flexWrap: 'wrap',
-              gap: '12px',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <div style={{ display: 'flex', gap: '6px' }}>
-                <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#e5e7eb' }} />
-                <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#e5e7eb' }} />
-                <span style={{ width: 10, height: 10, borderRadius: '50%', backgroundColor: '#e5e7eb' }} />
-              </div>
-              <div style={{ fontSize: '13px', fontWeight: 600, color: '#141414', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <span>Saro Operating Workspace</span>
-                <span
-                  style={{
-                    padding: '2px 8px',
-                    borderRadius: '4px',
-                    backgroundColor: '#e7f6ee',
-                    color: '#12a150',
-                    fontSize: '11px',
-                    fontWeight: 500,
-                  }}
-                >
-                  Live synced
-                </span>
-              </div>
-            </div>
-
-            {/* Currency Selector */}
-            <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              {(['USD', 'EUR', 'GBP'] as const).map((curr) => (
-                <button
-                  key={curr}
-                  type="button"
-                  onClick={() => setActiveCurrency(curr)}
-                  style={{
-                    padding: '4px 10px',
-                    borderRadius: '6px',
-                    fontSize: '12px',
-                    fontWeight: 600,
-                    backgroundColor: activeCurrency === curr ? '#141414' : '#f0f0f0',
-                    color: activeCurrency === curr ? '#ffffff' : '#707070',
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                  }}
-                >
-                  {curr}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Dashboard Main Canvas */}
-          <div style={{ padding: '32px' }}>
-            {/* Balance & Key Trend */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(280px, 100%), 1fr))',
-                gap: '24px',
-                marginBottom: '32px',
-              }}
-            >
-              <div>
-                <div style={{ fontSize: '13px', color: '#707070', fontWeight: 500, marginBottom: '6px' }}>
-                  Total Realtime Liquidity
-                </div>
-                <div
-                  className="mono-num"
-                  style={{
-                    fontSize: 'clamp(2rem, 3.5vw, 2.75rem)',
-                    fontWeight: 700,
-                    letterSpacing: '-0.03em',
-                    color: '#141414',
-                    marginBottom: '8px',
-                  }}
-                >
-                  {balances[activeCurrency].formatted}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '13px' }}>
-                  <span
-                    style={{
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      color: '#12a150',
-                      fontWeight: 600,
-                    }}
-                  >
-                    <ArrowUpRight size={15} />
-                    {balances[activeCurrency].change}
-                  </span>
-                  <span style={{ color: '#707070' }}>vs last month ({balances[activeCurrency].delta})</span>
-                </div>
-              </div>
-
-              {/* Mini Trend Area Graphic */}
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  justifyContent: 'flex-end',
-                  backgroundColor: '#fbfbfb',
-                  borderRadius: '12px',
-                  padding: '16px',
-                  border: '1px solid #f0f0f0',
-                }}
-              >
-                <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '12px', color: '#707070', marginBottom: '8px' }}>
-                  <span>30-Day Cash Flow Trend</span>
-                  <span style={{ color: '#12a150', fontWeight: 600 }}>Zero overdraft risk</span>
-                </div>
-                {/* SVG Sparkline */}
-                <svg viewBox="0 0 400 80" style={{ width: '100%', height: '56px', overflow: 'visible' }}>
-                  <defs>
-                    <linearGradient id="trendGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#0066ff" stopOpacity="0.25" />
-                      <stop offset="100%" stopColor="#0066ff" stopOpacity="0.0" />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M0,60 Q60,50 120,40 T240,25 T340,15 T400,8 L400,80 L0,80 Z"
-                    fill="url(#trendGradient)"
-                  />
-                  <path
-                    d="M0,60 Q60,50 120,40 T240,25 T340,15 T400,8"
-                    fill="none"
-                    stroke="#0066ff"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                  />
-                  <circle cx="400" cy="8" r="4" fill="#0066ff" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Quick Financial Summary Row: 4 Pillars */}
-            <div
-              style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(min(210px, 100%), 1fr))',
-                gap: '16px',
-                paddingTop: '24px',
-                borderTop: '1px solid #f0f0f0',
-              }}
-            >
-              <div
-                style={{
-                  padding: '16px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f7f7f7',
-                  border: '1px solid #ebebeb',
-                }}
-              >
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Payments
-                </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#141414', marginBottom: '2px' }}>
-                  128 payment methods
-                </div>
-                <div style={{ fontSize: '12px', color: '#12a150', fontWeight: 500 }}>Settle same day</div>
-              </div>
-
-              <div
-                style={{
-                  padding: '16px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f7f7f7',
-                  border: '1px solid #ebebeb',
-                }}
-              >
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Cards
-                </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#141414', marginBottom: '2px' }}>
-                  Virtual & physical cards
-                </div>
-                <div style={{ fontSize: '12px', color: 'var(--color-primary)', fontWeight: 500 }}>Live limit enforcement</div>
-              </div>
-
-              <div
-                style={{
-                  padding: '16px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f7f7f7',
-                  border: '1px solid #ebebeb',
-                }}
-              >
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Treasury
-                </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#141414', marginBottom: '2px' }}>
-                  Up to 4.2% yield
-                </div>
-                <div style={{ fontSize: '12px', color: '#12a150', fontWeight: 500 }}>Automated daily sweep</div>
-              </div>
-
-              <div
-                style={{
-                  padding: '16px',
-                  borderRadius: '12px',
-                  backgroundColor: '#f7f7f7',
-                  border: '1px solid #ebebeb',
-                }}
-              >
-                <div style={{ fontSize: '12px', fontWeight: 600, color: '#707070', textTransform: 'uppercase', marginBottom: '4px' }}>
-                  Payouts
-                </div>
-                <div style={{ fontSize: '15px', fontWeight: 600, color: '#141414', marginBottom: '2px' }}>
-                  Sent to 190 countries
-                </div>
-                <div style={{ fontSize: '12px', color: 'var(--color-primary)', fontWeight: 500 }}>Zero foreign FX markups</div>
-              </div>
-            </div>
-          </div>
-        </div>
+        </motion.div>
       </div>
+
+      <style>{`
+        @media (max-width: 960px) {
+          .hero-hanging-layer {
+            opacity: 0.22;
+          }
+          #hero {
+            padding-top: 150px !important;
+          }
+        }
+      `}</style>
     </section>
   );
 };
