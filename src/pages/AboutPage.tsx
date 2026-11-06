@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Shield, Sparkles, Heart, Compass, ArrowRight } from 'lucide-react';
@@ -28,14 +28,14 @@ export const AboutPage: React.FC = () => {
   ];
 
   const team = [
-    { name: 'Sarah Oâ€™Connor', role: 'Co-Founder & CEO', prev: 'Ex-Stripe, Goldman Sachs' },
+    { name: 'Sarah O’Connor', role: 'Co-Founder & CEO', prev: 'Ex-Stripe, Goldman Sachs' },
     { name: 'Liam Zhang', role: 'Co-Founder & CTO', prev: 'Ex-Brex, Robinhood Infrastructure' },
     { name: 'Elena Rossi', role: 'Head of Product', prev: 'Ex-Wise, Revolut Business' },
     { name: 'David Vance', role: 'Head of Treasury Rails', prev: 'Ex-JP Morgan, Barclays' },
   ];
 
   return (
-    <div style={{ paddingTop: '64px', paddingBottom: '96px' }}>
+    <div style={{ paddingTop: '116px', paddingBottom: '96px' }}>
       <div className="container" style={{ textAlign: 'center', marginBottom: '64px' }}>
         <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
           <Badge label="Our Mission" />
@@ -53,7 +53,7 @@ export const AboutPage: React.FC = () => {
           Building the calm operating system for money.
         </h1>
         <p className="section-description" style={{ margin: '0 auto', fontSize: '18px' }}>
-          We started Saro with a simple conviction: modern companies shouldnâ€™t need six disconnected bank portals, fifteen spreadsheets, and three days of manual receipt chasing to know where their money is.
+          We started Saro with a simple conviction: modern companies shouldn’t need six disconnected bank portals, fifteen spreadsheets, and three days of manual receipt chasing to know where their money is.
         </p>
       </div>
 

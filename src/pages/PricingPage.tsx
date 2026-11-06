@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { pricingPlans } from '../data/pricing';
 import { Button } from '../components/ui/Button';
 import { Badge } from '../components/ui/Badge';
@@ -9,7 +9,7 @@ export const PricingPage: React.FC = () => {
   const [annualBilling, setAnnualBilling] = useState(true);
 
   return (
-    <div style={{ paddingTop: '64px', paddingBottom: '80px' }}>
+    <div style={{ paddingTop: '116px', paddingBottom: '80px' }}>
       <div className="container" style={{ textAlign: 'center', marginBottom: '56px' }}>
         <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
           <Badge label="Transparent Pricing" />
@@ -169,7 +169,7 @@ export const PricingPage: React.FC = () => {
                   </Button>
 
                   <div style={{ fontSize: '12px', fontWeight: 600, color: '#adadad', textTransform: 'uppercase', marginBottom: '14px' }}>
-                    Whatâ€™s included
+                    What’s included
                   </div>
                   <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '10px' }}>
                     {plan.features.map((feature, idx) => (

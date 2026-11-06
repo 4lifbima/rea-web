@@ -7,7 +7,7 @@ export const NotFoundPage: React.FC = () => {
   return (
     <div
       style={{
-        paddingTop: '96px',
+        paddingTop: '132px',
         paddingBottom: '120px',
         textAlign: 'center',
       }}

@@ -4,7 +4,7 @@ import { FAQSection } from '../components/sections/FAQSection';
 
 export const ContactPage: React.FC = () => {
   return (
-    <div style={{ paddingTop: '20px' }}>
+    <div style={{ paddingTop: '80px' }}>
       <ContactSection />
       <FAQSection />
     </div>

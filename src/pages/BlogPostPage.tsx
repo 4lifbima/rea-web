@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { blogPostsData } from '../data/blog';
 import { ArrowLeft, Clock, Calendar, Share2, Check } from 'lucide-react';
@@ -22,7 +22,7 @@ export const BlogPostPage: React.FC = () => {
   const related = blogPostsData.filter((p) => p.slug !== slug).slice(0, 2);
 
   return (
-    <article style={{ paddingTop: '56px', paddingBottom: '96px' }}>
+    <article style={{ paddingTop: '116px', paddingBottom: '96px' }}>
       <div className="container" style={{ maxWidth: '820px' }}>
         {/* Back Link */}
         <Link

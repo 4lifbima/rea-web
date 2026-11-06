@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { Badge } from '../components/ui/Badge';
 import { Button } from '../components/ui/Button';
 import { Rocket, TrendingUp, Globe2, Building, CheckCircle2, ArrowRight } from 'lucide-react';
@@ -64,7 +64,7 @@ export const SolutionsPage: React.FC = () => {
   ];
 
   return (
-    <div style={{ paddingTop: '64px', paddingBottom: '96px' }}>
+    <div style={{ paddingTop: '116px', paddingBottom: '96px' }}>
       <div className="container" style={{ textAlign: 'center', marginBottom: '64px' }}>
         <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
           <Badge label="Tailored Solutions" />

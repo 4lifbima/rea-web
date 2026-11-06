@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Badge } from '../components/ui/Badge';
 import { blogPostsData } from '../data/blog';
 import { Clock, ArrowRight, Search } from 'lucide-react';
@@ -19,7 +19,7 @@ export const BlogPage: React.FC = () => {
   });
 
   return (
-    <div style={{ paddingTop: '64px', paddingBottom: '96px' }}>
+    <div style={{ paddingTop: '116px', paddingBottom: '96px' }}>
       <div className="container" style={{ textAlign: 'center', marginBottom: '56px' }}>
         <div style={{ display: 'inline-flex', marginBottom: '16px' }}>
           <Badge label="Finance Playbooks" />
@@ -175,7 +175,7 @@ export const BlogPage: React.FC = () => {
 
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                     <span style={{ fontSize: '18px', fontWeight: 700, color: '#141414', letterSpacing: '-0.04em' }}>saro</span>
-                    <span style={{ fontSize: '12px', color: '#707070' }}>Â· {post.date}</span>
+                    <span style={{ fontSize: '12px', color: '#707070' }}>· {post.date}</span>
                   </div>
                 </div>
 
